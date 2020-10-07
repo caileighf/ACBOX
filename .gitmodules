@@ -1,0 +1,6 @@
+[submodule "MCC_DAQ"]
+	path = MCC_DAQ
+	url = https://github.com/caileighf/MCC_DAQ.git
+[submodule "cli-spectrogram"]
+	path = cli-spectrogram
+	url = https://github.com/caileighf/cli-spectrogram.git
