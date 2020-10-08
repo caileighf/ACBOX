@@ -4,3 +4,6 @@
 [submodule "cli-spectrogram"]
 	path = cli-spectrogram
 	url = https://github.com/caileighf/cli-spectrogram.git
+[submodule "ACBOX_fabrication_files"]
+	path = ACBOX_fabrication_files
+	url = https://github.com/caileighf/ACBOX_fabrication_files.git

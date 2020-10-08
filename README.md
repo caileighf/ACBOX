@@ -23,6 +23,13 @@
 |__MCC_DAQ Driver__| <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_CONT_running.png" alt="MCCDAQ-screen-capture" width="" height=""><img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_TRIG_running.png" alt="MCCDAQ-screen-capture" width="" height=""> | MCCDAQ drives the DAQ with a user defined configuration | [MCCDAQ Driver](https://github.com/caileighf/MCC_DAQ) |
 |__cli-sprectrogram__| <img src="https://raw.githubusercontent.com/caileighf/cli-spectrogram/master/images/default.png" alt="cli-spectrogram" width="" height=""> | The cli-spectrogram allows the user to see (in real-time & post mission) what the hydrophones are picking up | (PyPi) [cli-spectrogram](https://pypi.org/project/cli-spectrogram/) |
 
+### MCC_DAQ Driver Screen Grabs
+
+| Mode | Running Output  | Exit Output | Notes |
+|------|-----------------|-------------|-------|
+|__CONTINUOUS__| <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_CONT_running.png" alt="MCCDAQ-screen-capture" width="" height=""> | <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_CONT_exit.png" alt="MCCDAQ-screen-capture" width="" height=""> | Scans data in an endless loop.
+|__TRIGGERED__| <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_TRIG_running.png" alt="MCCDAQ-screen-capture" width="" height=""> | <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_TRIG_exit.png" alt="MCCDAQ-screen-capture" width="" height=""> | Sampling begins when a trigger condition is met. _Make sure your trigger source is connected to the TRIG\_IN Pin_
+
 ### How To Configure The DAQ
 The `ACBOX` repository has the `MCC_DAQ` repository as a submodule and the following instructions are assuming you are using this submodule.
 ```
@@ -30,11 +37,17 @@ $ cd ~/ACBOX/MCC_DAQ  # this is where this repo is on the  RaspberryPi. Change i
 $ ./config_daq        # this script will walk you through the options for the DAQ
 $ ./start_collect     # this will launch either the continuous or triggered driver
 ```
-| Mode | Running Output  | Exit Output | Notes |
-|------|-----------------|-------------|-------|
-|__CONTINUOUS__| <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_CONT_running.png" alt="MCCDAQ-screen-capture" width="" height=""> | <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_CONT_exit.png" alt="MCCDAQ-screen-capture" width="" height=""> | Scans data in an endless loop.
-|__TRIGGERED__| <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_TRIG_running.png" alt="MCCDAQ-screen-capture" width="" height=""> | <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_TRIG_exit.png" alt="MCCDAQ-screen-capture" width="" height=""> | Sampling begins when a trigger condition is met. _Make sure your trigger source is connected to the TRIG\_IN Pin_
 
+#### `./config_daq` Output For __CONTINUOUS__ Data Acquisition 
+<img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_config_CONT_output.png" alt="MCCDAQ-screen-capture" width="" height="">
+
+#### `./config_daq` Output For __TRIGGERED__ Data Acquisition 
+<img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/screen_grab_config_TRIG_output.png" alt="MCCDAQ-screen-capture" width="" height="">
+
+### REV_02 of the ACBOX
+<img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/angle-ports.jpg" alt="open_all" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/inside.JPG" alt="open_all" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/angle.jpg" alt="open_all" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/redacted_plate.jpg" alt="open_all" width="400" height="">
+
+### REV_01 of the ACBOX
 <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/open_electronics.png" alt="open_electronics" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/analog_top.png" alt="analog_top" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/closed_angle_ports.png" alt="closed_angle_ports" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/display_keyboard.png" alt="display_keyboard" width="400" height="">
 <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/adapter_6pin_focus.png" alt="adapter_6pin_focus" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/adapter_9pin_focus.png" alt="adapter_9pin_focus" width="400" height="">
 <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/analog_angle.png" alt="analog_angle" width="400" height=""> <img src="https://raw.githubusercontent.com/caileighf/ACBOX/master/images/array_6pin.png" alt="array_6pin" width="400" height="">
