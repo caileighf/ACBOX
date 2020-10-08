@@ -1,4 +1,12 @@
 ## Setting Up The Raspberry Pi For Acoustic Data Logging
+Sections in this README are in order -- make sure you're running the setup scripts in the following order:<br>
+_All scripts must complete successfully before moving on to the next step!_
+
+1. `install-dependencies.sh`
+2. `init-uldaq.sh`
+3. `init-environment.sh`
+4. `make_udev_rule.sh`
+5. `init-gpsd.sh`
 
 ### Installing General Dependencies 
 __Requires Internet Connection__ -- The following command will install USB drivers, networking tools, gpsd, screen and, htop to name a few. Make sure you're running this script from the `scripts/` directory.
@@ -10,6 +18,12 @@ $ ./install-dependencies.sh
 __Requires Internet Connection__ -- The following script will get the 1.2.0 version of the uldaq software suite, make, build and, install it. The directory containing the binaries will be here: `~/libuldaq-1.2.0/`
 ```
 $ ./init-uldaq.sh
+```
+
+### Setting Up Python `virtualenv` and Shell Environment
+__Requires Successful `uldaq` Setup__ -- This script sets environment variables and sets up the python virtual environment.
+```
+$ ./init-environment.sh
 ```
 
 ### Setting Up `udev` Rules The Adafruit Ultimate GPS Breakout Board
