@@ -14,6 +14,7 @@ echo "export PYTHON_EXE=~/venv/bin/python" >> /home/pi/.bashrc
 echo "[4/4]: Adding shell_history log"
 export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]" >> ~/shell_history'
 echo export\ PROMPT_COMMAND=\'$PROMPT_COMMAND\' >> /home/pi/.bashrc
+echo "alias python=$PYTHON_EXE" >> /home/pi/.bashrc
 source /home/pi/.bashrc
 echo "The python environment and shell environment are setup."
 echo "========================================================================="
