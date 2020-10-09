@@ -77,7 +77,7 @@ $DEBUG_HELP\n";
 }
 
 MSG=""
-if [[ $# = 1 ]] ; then
+if [[ "$#" = 0 ]] ; then
     print_help
 else
     for ARG in "$@"; do
@@ -90,6 +90,7 @@ else
             MSG="$DEBUG_HELP"
         else 
             printf "$USAGE\n"
+            break;
         fi
 
         # print header on first iter
