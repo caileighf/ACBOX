@@ -10,4 +10,3 @@ diff <(echo "$gpsdata") <(echo "") > /dev/null || echo "No GPS data"; exit 1;
 lat=$( echo "$gpsdata"  | jsawk 'return this.lat' )
 lon=$( echo "$gpsdata"  | jsawk 'return this.lon' )
 echo "$lat, $lon - https://maps.google.com/maps?q=$lat,+$lon"
-exit 0;

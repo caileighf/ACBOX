@@ -76,11 +76,8 @@ $CLI_HELP\n\
 $DEBUG_HELP\n";
 }
 
-echo "$@"
-
 MSG=""
 if [[ $# = 1 ]] ; then
-    echo "No args print"
     print_help
 else
     for ARG in "$@"; do
@@ -93,7 +90,6 @@ else
             MSG="$DEBUG_HELP"
         else 
             printf "$USAGE\n"
-            exit 1;
         fi
 
         # print header on first iter
@@ -110,4 +106,3 @@ else
     done
 fi
 echo ""
-exit 0;
