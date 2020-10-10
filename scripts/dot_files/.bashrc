@@ -123,11 +123,17 @@ export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | 
 alias python=/home/pi/venv/bin/python
 
 alias on_ssh='$HOME/ACBOX/scripts/utils/auto_ssh_screen.sh'
-alias help='$HOME/ACBOX/scripts/debug/echo_help.sh'
-alias help_cli='$HOME/ACBOX/scripts/debug/echo_help.sh --cli'
-alias help_daq='$HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq'
-alias help_debug='$HOME/ACBOX/scripts/debug/echo_help.sh --debug'
+alias help='$HOME/ACBOX/scripts/debug/echo_help.sh | less'
+alias help_cli='$HOME/ACBOX/scripts/debug/echo_help.sh --cli | less'
+alias help_daq='$HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less'
+alias help_debug='$HOME/ACBOX/scripts/debug/echo_help.sh --debug | less'
 alias get_loc='$HOME/ACBOX/scripts/status/get_loc.sh'
+alias get_cpu_temp='$HOME/ACBOX/scripts/status/get_cpu_temp.sh'
+alias get_free_mem='$HOME/ACBOX/scripts/status/get_free_mem.sh'
+alias get_volume='$HOME/ACBOX/scripts/status/get_volume.sh Headphone'
+alias config_daq='$HOME/ACBOX/MCC_DAQ/config_daq'
+alias start_collect='$HOME/ACBOX/MCC_DAQ/start_collect'
+alias daq_state='$HOME/ACBOX/scripts/status/get_daq_state.sh'
 
 alias has_fix="gpspipe -n 4 -w | grep 'TPV' | grep -oE 'mode\":0,|mode\":1,' > /dev/null && echo 'GPS HAS NO FIX' || echo 'GPS HAS FIX'"
 alias has_pps="gpspipe -n 3 -w | grep 'WATCH' | grep -oE 'pps\":true' > /dev/null && echo 'HAS PPS' || echo 'NO PPS'"

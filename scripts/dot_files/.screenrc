@@ -28,13 +28,14 @@ backtick 3 10 10 $HOME/ACBOX/scripts/status/get_cpu_temp.sh
 backtick 4 10 10 $HOME/ACBOX/scripts/status/get_free_mem.sh
 # show volume (C-a s)
 backtick 5 10 10 $HOME/ACBOX/scripts/status/get_volume.sh Headphone
+# show daq state (C-a d)
+backtick 6 10 10 $HOME/ACBOX/scripts/status/get_daq_state.sh
 
 # echo minimal location (lat/lon) with google map link
 # backtick 3 30 30 $HOME/ACBOX/scripts/status/get_loc.sh
 
 hardstatus alwayslastline
-hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %1`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
-
+hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
 # mouse tracking allows to switch region focus by clicking
 #mousetrack on
 
@@ -53,9 +54,10 @@ bindkey "^[[1;5B" focus down
 bind f eval "caption splitonly" "hardstatus ignore"
 bind F eval "caption always"    "hardstatus alwayslastline"
 bind t eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %3`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind m eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %5`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind m eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| free space: %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| volume: %5`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind d eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 
 # F2 puts Screen into resize mode. Resize regions using hjkl keys.
 bindkey "^[OQ" eval "command -c rsz" # enter resize mode

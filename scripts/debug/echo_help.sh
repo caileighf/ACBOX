@@ -12,12 +12,36 @@ END
 DEBUG_HELP=$(cat <<-END
      Remote Debugging Help/Tools:
 
-        Useful alias: 
-            $ has_fix    # find out if GPS has fix
-            $ has_pps    # find out if PPS is being used
-            $ echo_loc   # echo lat, lon and, google maps link
-            $ see_daq    # checks if DAQ is connected
-            $ is_running # 
+        Useful alias: (that you can type directly from the prompt)
+            $ has_fix      # find out if GPS has fix
+            $ has_pps      # find out if PPS is being used
+            $ get_loc      # echo lat, lon and, google maps link
+            $ see_daq      # checks if DAQ is connected
+            $ daq_state    # checks if DAQ is Running or Idle
+            $ help         # show complete help message | less
+            $ help_cli     # show cli-spectrogram help message | less
+            $ help_daq     # show MCC_DAQ driver help message | less
+            $ help_debug   # show THIS help message | less
+            $ get_volume   # get volume on RPi headphone jack
+            $ get_cpu_temp # get cpu temp in celsius
+            $ get_free_mem # get remaining disk space
+
+        Change screen session status bar:
+         * C-a means Ctrl + a. [C-a x] means: Ctrl + a (release-then-) x
+            C-a t -- show cpu temp
+            C-a s -- show volume on RPi headphone jack
+            C-a m -- show available disk space
+            C-a u -- show machine up time
+
+        Other help screen keyboard shortcuts:
+            C-a ? --- Show screen keyboard shortcuts
+            C-a ESC - Scroll mode (hit ESC again to exit)
+            C-a w --- Show all windows
+            C-a F2 -- Puts Screen into resize mode. 
+                      Resize regions using hjkl keys
+            C-a f --- Hide both status bars
+            C-a F --- Show both status bars
+
 END
 )
 
