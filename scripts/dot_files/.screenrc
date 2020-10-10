@@ -17,7 +17,8 @@ defscrollback 10000
 caption always '%{= Kw}%w'
 
 # check up time once every 5 mins
-backtick 1 300 300 uptime -s
+# backtick 1 300 300 uptime -s
+backtick 1 1 1 read SEC <<<$(date +'%S'); if (( $SEC % 4 == 0 )); then uptime -s; else $HOME/ACBOX/scripts/status/get_cpu_temp.sh; fi
 # check if GPS has fix
 backtick 2 60 60 $HOME/ACBOX/scripts/status/get_fix.sh > /dev/null\
  && $HOME/ACBOX/scripts/status/get_loc.sh\
@@ -26,7 +27,7 @@ backtick 2 60 60 $HOME/ACBOX/scripts/status/get_fix.sh > /dev/null\
 # backtick 3 30 30 $HOME/ACBOX/scripts/status/get_loc.sh
 
 hardstatus alwayslastline
-hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %1`%?%{g}][%=%{+b  B}%2`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
+hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %1`%?%{g}][%=%{+b  Y}%2`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
 
 # mouse tracking allows to switch region focus by clicking
 #mousetrack on

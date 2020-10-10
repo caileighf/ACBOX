@@ -1,2 +1,2 @@
 #!/bin/bash                                                                                                                                                             
-sensors | grep $1 | awk '{print $3}' | tr -d +
+TEMP=$(vcgencmd measure_temp | egrep -o '[0-9]*\.[0-9]*') && echo "cpu temp: $TEMP'C"
