@@ -24,8 +24,10 @@ backtick 1 60 60 $HOME/ACBOX/scripts/status/get_fix.sh > /dev/null\
 backtick 2 300 300 uptime -s
 # show cpu temp (C-a t)
 backtick 3 10 10 $HOME/ACBOX/scripts/status/get_cpu_temp.sh
-# show free space (C-a s)
+# show free space (C-a m)
 backtick 4 10 10 $HOME/ACBOX/scripts/status/get_free_mem.sh
+# show volume (C-a s)
+backtick 5 10 10 $HOME/ACBOX/scripts/status/get_volume.sh Headphone
 
 # echo minimal location (lat/lon) with google map link
 # backtick 3 30 30 $HOME/ACBOX/scripts/status/get_loc.sh
@@ -51,7 +53,8 @@ bindkey "^[[1;5B" focus down
 bind f eval "caption splitonly" "hardstatus ignore"
 bind F eval "caption always"    "hardstatus alwayslastline"
 bind t eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %3`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind c eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind m eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %5`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 
 # F2 puts Screen into resize mode. Resize regions using hjkl keys.
