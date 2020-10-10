@@ -1,2 +1,2 @@
 #!/bin/bash                                                                                                                                                             
-free -m | grep - | awk '{print $4}'
+df -h --output=avail . | grep G
