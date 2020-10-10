@@ -112,41 +112,23 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# ACBOX Related additions
+#
+#   ACBOX Related additions
+#
+export PATH=$PATH:~/ACBOX/scripts:~/ACBOX/scripts/debug:~/ACBOX/scripts/utils:~/ACBOX/scripts/status
+export PATH=$PATH:~/ACBOX/MCC_DAQ:~/ACBOX/MCC_DAQ/test:~/ACBOX/MCC_DAQ/scripts
 export PYTHON_EXE=~/venv/bin/python
 export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]" >> ~/shell_history'
 
 alias python=/home/pi/venv/bin/python
 
-alias on_ssh='/bin/bash /home/pi/ACBOX/scripts/auto_ssh_screen.sh'
-alias help='/bin/bash /home/pi/ACBOX/scripts/echo-help.sh'
-alias help_cli='/bin/bash /home/pi/ACBOX/scripts/echo-help.sh --cli'
-alias help_daq='/bin/bash /home/pi/ACBOX/scripts/echo-help.sh --mccdaq'
-alias help_debug='/bin/bash /home/pi/ACBOX/scripts/echo-help.sh --debug'
-alias echo_loc='/bin/bash /home/pi/ACBOX/scripts/echo_minimal_loc.sh'
+alias on_ssh='$HOME/ACBOX/scripts/utils/auto_ssh_screen.sh'
+alias help='$HOME/ACBOX/scripts/debug/echo_help.sh'
+alias help_cli='$HOME/ACBOX/scripts/debug/echo_help.sh --cli'
+alias help_daq='$HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq'
+alias help_debug='$HOME/ACBOX/scripts/debug/echo_help.sh --debug'
+alias get_loc='$HOME/ACBOX/scripts/status/get_loc.sh'
 
 alias has_fix="gpspipe -n 4 -w | grep 'TPV' | grep -oE 'mode\":0,|mode\":1,' > /dev/null && echo 'GPS HAS NO FIX' || echo 'GPS HAS FIX'"
 alias has_pps="gpspipe -n 3 -w | grep 'WATCH' | grep -oE 'pps\":true' > /dev/null && echo 'HAS PPS' || echo 'NO PPS'"
 alias see_daq="lsusb | grep 'Measurement Computing Corp' > /dev/null && echo 'DAQ Connected' || echo 'DAQ Not Found'"
-
-#
-#  Attaches to the first Detached Screen. Otherwise starts a new Screen.
-# https://superuser.com/questions/580087/automatically-start-screen-upon-ssh-login
-
-# Only run if we are not already inside a running screen and only if in an SSH session.
-if [[ -z "${STY}" && ! -z "${SSH_CLIENT}" ]]; then
-  detached_screens=($(screen -ls | grep pts | grep -v Attached))
-
-  for screen in "${detached_screens[@]}"; do
-    if [[ "${screen}" == *".pts"* ]]; then
-      IFS='.pts' read -ra split <<< "${screen}"
-      for id in "${split[@]}"; do
-        first_id="${id}"
-        break
-      done 
-      break
-    fi
-  done
-
-  screen -R $first_id
-fi
