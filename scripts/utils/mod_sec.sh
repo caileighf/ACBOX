@@ -1,0 +1,1 @@
+read SEC <<<$(date +'%s'); if (( $SEC % $1 == 0 )); then return 0; else return 1; fi

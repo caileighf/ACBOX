@@ -18,7 +18,7 @@ caption always '%{= Kw}%w'
 
 # check up time once every 5 mins
 # backtick 1 300 300 uptime -s
-backtick 1 1 1 $HOME/ACBOX/scripts/status/mod_sec.sh 2\
+backtick 1 1 1 $HOME/ACBOX/scripts/utils/mod_sec.sh 2\
  && $HOME/ACBOX/scripts/status/get_cpu_temp.sh\
   || uptime -s
 # check if GPS has fix
