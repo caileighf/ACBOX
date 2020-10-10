@@ -12,11 +12,12 @@ END
 DEBUG_HELP=$(cat <<-END
      Remote Debugging Help/Tools:
 
-        $ cd ~/ACBOX/cli-debugger/
-
-        Useful shortcuts: 
-            "f" -----> Toggle fullscreen
-            "c" -----> Cycle through channels
+        Useful alias: 
+            $ has_fix    # find out if GPS has fix
+            $ has_pps    # find out if PPS is being used
+            $ echo_loc   # echo lat, lon and, google maps link
+            $ see_daq    # checks if DAQ is connected
+            $ is_running # 
 END
 )
 
