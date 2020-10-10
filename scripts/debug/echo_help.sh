@@ -12,7 +12,7 @@ END
 DEBUG_HELP=$(cat <<-END
      Remote Debugging Help/Tools:
 
-        Useful alias: (that you can type directly from the prompt)
+        Useful aliases: (type directly from the prompt)
             $ has_fix      # find out if GPS has fix
             $ has_pps      # find out if PPS is being used
             $ get_loc      # echo lat, lon and, google maps link
@@ -32,6 +32,7 @@ DEBUG_HELP=$(cat <<-END
             C-a s -- show volume on RPi headphone jack
             C-a m -- show available disk space
             C-a u -- show machine up time
+            C-a d -- show DAQ state (Default at launch)
 
         Other help screen keyboard shortcuts:
             C-a ? --- Show screen keyboard shortcuts
@@ -48,8 +49,7 @@ END
 CLI_HELP=$(cat <<-END
      Start Command Line Spectrogram:
 
-        $ cd ~/ACBOX/cli-spectrogram/
-        $ python cli-spectrogram/cli_spectrogram.py
+        $ cli_spectrogram [OPTIONS]
 
         Useful shortcuts: 
             "f" -----> Toggle fullscreen
@@ -72,9 +72,12 @@ END
 MCCDAQ_HELP=$(cat <<-END
      Start Acoustic Data Collection:
 
-        $ cd ~/ACBOX/MCC_DAQ/   # ACBOX driver directory
-        $ ./config_daq          # Interactive config
-        $ ./start_collect       # Start data acquisition
+        Default data directory:
+            $ cd /home/$USER/ACBOX/MCC_DAQ/data/ 
+
+        Commands:
+            $ config_daq    # Interactive config
+            $ start_collect # Start data acquisition
 END
 )
 
@@ -82,7 +85,7 @@ USAGE=$(cat <<-END
  usage: ./echo-help.sh              # for BOTH help messages
         ./echo-help.sh --mccdaq     # for MCC_DAQ help
         ./echo-help.sh --cli        # for cli-spectrogram help
-        ./echo-help.sh --help | -h  # print this usage message
+        ./echo-help.sh --help/-h  # print this usage message
 END
 )
 
