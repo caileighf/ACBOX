@@ -26,15 +26,33 @@ DEBUG_HELP=$(cat <<-END
             $ get_cpu_temp # get cpu temp in celsius
             $ get_free_mem # get remaining disk space
 
-        Change screen session status bar:
-         * C-a means Ctrl + a. [C-a x] means: Ctrl + a (release-then-) x
-            C-a t -- show cpu temp
-            C-a s -- show volume on RPi headphone jack
-            C-a m -- show available disk space
-            C-a u -- show machine up time
-            C-a d -- show DAQ state (Default at launch)
+        GNU screen status bar section info
+            1. [$USER@$HOST | DAQ state: Idle]
+                  |     |            |
+                  |     |            -- User selectable (see next table)
+                  |     --------------- Host machine
+                  --------------------- Current user
 
-        Other help screen keyboard shortcuts:
+            2. no fix state: [    GPS HAS NO FIX    ]
+               gpsd error:   [      No GPS data     ]
+               fix state: 
+            [ 41.525098,-70.672022 - https://maps.google.com/maps?q=41.525098,+-70.672022 ]
+                |           |               |
+                |           |               --- URL to google maps location
+                |           ------------------- Longitude (Decimal Degrees)
+                ------------------------------- Latitude (Decimal Degrees)
+
+            3. [system time: 10/11/20 14:50:17] -- Current system date/time
+
+        Change screen session status bar:
+         * C-a --> Ctrl + a
+            C-a t -- show cpu temp ----------------------- [$USER@$HOSTNAME | cpu temp: ]
+            C-a s -- show volume on RPi headphone jack --- [$USER@$HOSTNAME | DAQ state: Idle]
+            C-a m -- show available disk space ----------- [$USER@$HOSTNAME | DAQ state: Idle]
+            C-a u -- show machine up time ---------------- [$USER@$HOSTNAME | up since: 2020-09-29 15:58:51]
+            C-a d -- show DAQ state (Default at launch) -- [$USER@$HOSTNAME | DAQ state: Idle]
+
+        Other helpful screen keyboard shortcuts:
             C-a ? --- Show screen keyboard shortcuts
             C-a ESC - Scroll mode (hit ESC again to exit)
             C-a w --- Show all windows
@@ -73,11 +91,28 @@ MCCDAQ_HELP=$(cat <<-END
      Start Acoustic Data Collection:
 
         Default data directory:
-            $ cd /home/$USER/ACBOX/MCC_DAQ/data/ 
+        /home/$USER/ACBOX/MCC_DAQ/data/ 
 
         Commands:
             $ config_daq    # Interactive config
             $ start_collect # Start data acquisition
+END
+)
+
+WELCOME=$(cat <<-END
+$(cat $HOME/ACBOX/scripts/banner.txt)
+
+Helpful keyboard shortcuts and aliases:
+    $ help         # show complete help message
+    $ has_fix      # find out if GPS has fix
+    C-a u -- show machine up time --------------- [.. up since: 2020-09-29 15:58:51]
+    C-a d -- show DAQ state (Default at launch) - [.. DAQ state: Idle]
+
+Other helpful screen keyboard shortcuts:
+    C-a ? --- Show screen keyboard shortcuts
+    C-a ESC - Scroll mode (hit ESC again to exit)
+    C-a w --- Show all windows
+
 END
 )
 
@@ -107,6 +142,10 @@ $DEBUG_HELP\n";
 MSG=""
 if [[ "$#" = 0 ]] ; then
     print_help
+elif [[ "$1" = "welcome" ]] ; then
+    PRINT_HEADER=false
+    printf "\n$WELCOME"
+    echo -e "\n$HLINE\n$MCCDAQ_HELP\n"
 else
     for ARG in "$@"; do
         # check for known args
