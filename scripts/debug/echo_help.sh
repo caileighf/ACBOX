@@ -100,15 +100,15 @@ END
 )
 
 WELCOME=$(cat <<-END
-$(cat $HOME/ACBOX/scripts/banner.txt)
+ $(cat $HOME/ACBOX/scripts/banner.txt)
 
-Helpful keyboard shortcuts and aliases:
+ Helpful keyboard shortcuts and aliases:
     $ help         # show complete help message
     $ has_fix      # find out if GPS has fix
     C-a u -- show machine up time --------------- [.. up since: 2020-09-29 15:58:51]
     C-a d -- show DAQ state (Default at launch) - [.. DAQ state: Idle]
 
-Other helpful screen keyboard shortcuts:
+ Other helpful screen keyboard shortcuts:
     C-a ? --- Show screen keyboard shortcuts
     C-a ESC - Scroll mode (hit ESC again to exit)
     C-a w --- Show all windows
