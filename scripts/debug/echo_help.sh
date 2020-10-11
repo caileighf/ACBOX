@@ -100,7 +100,7 @@ END
 )
 
 WELCOME=$(cat <<-END
- $(cat $HOME/ACBOX/scripts/banner.txt)
+$(cat $HOME/ACBOX/scripts/banner.txt)
 
  Helpful keyboard shortcuts and aliases:
     $ help         # show complete help message
