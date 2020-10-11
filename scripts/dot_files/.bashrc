@@ -123,7 +123,7 @@ export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | 
 alias python=/home/pi/venv/bin/python
 
 alias on_ssh='$HOME/ACBOX/scripts/utils/auto_ssh_screen.sh'
-alias help='$HOME/ACBOX/scripts/debug/echo_help.sh | less'
+alias help='$HOME/ACBOX/scripts/debug/echo_help.sh'
 alias help_cli='$HOME/ACBOX/scripts/debug/echo_help.sh --cli | less'
 alias help_daq='$HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less'
 alias help_debug='$HOME/ACBOX/scripts/debug/echo_help.sh --debug | less'
@@ -139,3 +139,6 @@ alias daq_state='$HOME/ACBOX/scripts/status/get_daq_state.sh'
 alias has_fix="gpspipe -n 4 -w | grep 'TPV' | grep -oE 'mode\":0,|mode\":1,' > /dev/null && echo 'GPS HAS NO FIX' || echo 'GPS HAS FIX'"
 alias has_pps="gpspipe -n 3 -w | grep 'WATCH' | grep -oE 'pps\":true' > /dev/null && echo 'HAS PPS' || echo 'NO PPS'"
 alias see_daq="lsusb | grep 'Measurement Computing Corp' > /dev/null && echo 'DAQ Connected' || echo 'DAQ Not Found'"
+
+# Commands that run at the start of every session
+on_ssh
