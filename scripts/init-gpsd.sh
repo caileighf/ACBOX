@@ -9,3 +9,5 @@ to help synchronize the time edit the /boot/config.txt file and adding the follo
 \
 # enable GPS PPS\n\
 dtoverlay=pps-gpio,gpiopin=4\n\n"
+
+# server time.nist.gov

@@ -28,10 +28,10 @@ DEBUG_HELP=$(cat <<-END
 
         GNU screen status bar section info
             1. [$USER@$HOST | DAQ state: Idle]
-                  |     |            |
-                  |     |            -- User selectable (see next table)
-                  |     --------------- Host machine
-                  --------------------- Current user
+                |     |            |
+                |     |            -- User selectable (see next table)
+                |     --------------- Host machine
+                --------------------- Current user
 
             2. no fix state: [    GPS HAS NO FIX    ]
                gpsd error:   [      No GPS data     ]
