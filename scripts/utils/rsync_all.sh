@@ -16,14 +16,14 @@ do
     esac
 done
 
-DRY_RUN=" "
+DRY_RUN=false
 i=0;
 for ARG in "$@" 
 do
     i=$((i + 1));
 
     if [ ARG = '--dry-run' ]; then
-        DRY_RUN="--dry-run";
+        DRY_RUN=true;
     elif [ ARG = '--help' ]; then
         echo -e "\n$USAGE\n"
         exit 1;
@@ -56,4 +56,8 @@ END
 )
 echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 
-rsync -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" "$DRY_RUN"
+if [ "$DRY_RUN" = true ]; then
+    rsync -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run
+else
+    rsync -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG"
+fi
