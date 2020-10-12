@@ -35,7 +35,7 @@ CONFIG_FILE=$(cat /home/pi/ACBOX/MCC_DAQ/config.json)
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
 HEADER=$(head -n 10 "${DATA_DIR}SINGLE_log.log")
 TEMP_LOG=".temp_rsync"
-RSYNC_CMD="rsync -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN}"
+RSYNC_CMD="rsync -a -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN}"
 PAYLOAD=$(cat <<-END
 
 This data was transferred on:
@@ -57,7 +57,7 @@ END
 echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 
 if [ "$DRY_RUN" = true ]; then
-    rsync -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run
+    rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run
 else
-    rsync -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG"
+    rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG"
 fi

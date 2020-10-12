@@ -3,7 +3,6 @@ USAGE=$(cat <<-END
  usage: rsync_clean.sh -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> [OPTIONAL-ARGS]
         [OPTIONAL-ARGS]:
         --dry-run ----> Run as dry run with no actual changes
-        --rsync-opts -> Additional rsync options (default -Phr --delete-after)
 
 END
 )
@@ -17,29 +16,26 @@ do
     esac
 done
 
-DRY_RUN=""
+DRY_RUN=false
 i=0;
 for ARG in "$@" 
 do
     i=$((i + 1));
 
     if [ ARG = '--dry-run' ]; then
-        DRY_RUN="--dry-run";
-    elif [ ARG = '--rsync-opts' ]; then
-        shift;
-        RSYNC_OPTS="$@"
-        break;
+        DRY_RUN=true;
     elif [ ARG = '--help' ]; then
         echo -e "\n$USAGE\n"
-        return 1;
+        exit 1;
     fi
     shift;
 done
 
 CONFIG_FILE=$(cat /home/pi/ACBOX/MCC_DAQ/config.json)
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
-HEADER=$(head -n "$DATA_DIR/SINGLE_log.log")
-RSYNC_CMD="rsync -r -P -h --log-file "$TEMP_LOG" --dry-run --delete-after "RSYNC_OPTS" "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST""
+HEADER=$(head -n 10 "${DATA_DIR}SINGLE_log.log")
+TEMP_LOG=".temp_rsync"
+RSYNC_CMD="rsync -a -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN} --remove-source-files"
 PAYLOAD=$(cat <<-END
 
 This data was transferred on:
@@ -58,9 +54,18 @@ $ $RSYNC_CMD
 
 END
 )
-TEMP_LOG=".temp_rsync"
 echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 
-rsync -r -P -h --log-file "$TEMP_LOG" --dry-run --delete-after "RSYNC_OPTS" "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST"
-RC=$?
-return $RC
+if [ "$DRY_RUN" = true ]; then
+    rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run --remove-source-files
+else
+    cat "$TEMP_LOG"
+    echo "---"
+    echo "Are you sure you want to remove the source files after transfer?"
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --remove-source-files; break;;
+            No ) exit;;
+        esac
+    done
+fi
