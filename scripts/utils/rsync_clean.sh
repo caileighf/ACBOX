@@ -58,6 +58,7 @@ echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 if [ "$DRY_RUN" = true ]; then
     rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run --remove-source-files
 else
+    echo "Information about the data to be transferred:"
     cat "$TEMP_LOG"
     echo "---"
     echo "Are you sure you want to remove the source files after transfer?"
