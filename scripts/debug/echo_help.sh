@@ -152,7 +152,9 @@ function print_help {
 $HEADER\n\
 $MCCDAQ_HELP\n\
     $HLINE\n\
-$CLI_HELP\n";
+$CLI_HELP\n\
+    $HLINE\n\
+$DEBUG_HELP\n";
 }
 
 MSG=""
@@ -161,7 +163,7 @@ if [[ "$#" = 0 ]] ; then
 elif [[ "$1" = "welcome" ]] ; then
     PRINT_HEADER=false
     printf "\n$WELCOME"
-    echo -e "\n$HLINE\n$MCCDAQ_HELP\n"
+    echo -e "\n$HLINE\n"
 else
     for ARG in "$@"; do
         # check for known args
