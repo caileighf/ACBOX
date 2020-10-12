@@ -152,9 +152,7 @@ function print_help {
 $HEADER\n\
 $MCCDAQ_HELP\n\
     $HLINE\n\
-$CLI_HELP\n\
-    $HLINE\n\
-$DEBUG_HELP\n";
+$CLI_HELP\n";
 }
 
 MSG=""
