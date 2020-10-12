@@ -19,7 +19,7 @@ do
     fi
 done
 
-while getopts u:i:d:dr flag
+while getopts u:i:d:s: flag
 do
     case "${flag}" in
         u) REMOTE_USER=${OPTARG};;
@@ -31,9 +31,9 @@ done
 
 CONFIG_FILE=$(cat /home/pi/ACBOX/MCC_DAQ/config.json)
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
-HEADER=$(head -n 10 "${DATA_DIR}SINGLE_log.log")
+HEADER=$(head -n 10 "${DATA_DIR}/SINGLE_log.log")
 TEMP_LOG=".temp_rsync"
-RSYNC_CMD="rsync -a -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN} --remove-source-files"
+RSYNC_CMD="rsync -a -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN}"
 PAYLOAD=$(cat <<-END
 
 $(date)
@@ -54,9 +54,9 @@ END
 echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 
 DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
-
+echo "$DAQ_STATE"
 while [ DAQ_STATE = "Running" ]; do
     rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG"
-    echo -e "\n$(date) --> rsync will start again in $SECONDS second(s)\n" >> "$TEMP_LOG"
+    echo -e "\n$(date) --> rsync will start again in $SECONDS second(s)\n" | tee "$TEMP_LOG"
     sleep "$SECONDS";
 done
