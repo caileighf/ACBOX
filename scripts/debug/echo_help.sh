@@ -163,7 +163,6 @@ if [[ "$#" = 0 ]] ; then
 elif [[ "$1" = "welcome" ]] ; then
     PRINT_HEADER=false
     printf "\n$WELCOME"
-    echo -e "\n$HLINE\n"
 else
     for ARG in "$@"; do
         # check for known args
