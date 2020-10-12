@@ -38,7 +38,7 @@ done
 
 CONFIG_FILE=$(cat /home/pi/ACBOX/MCC_DAQ/config.json)
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
-HEADER=$(head -n "$DATA_DIR/SINGLE_log.log")
+HEADER=$(head -n "$DATA_DIRSINGLE_log.log")
 RSYNC_CMD="rsync -r -P -h "RSYNC_OPTS" "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run"
 PAYLOAD=$(cat <<-END
 
