@@ -105,13 +105,40 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
  Helpful keyboard shortcuts and aliases:
     $ help         # show complete help message
     $ has_fix      # find out if GPS has fix
-    C-a u -- show machine up time --------------- [.. up since: 2020-09-29 15:58:51]
+    C-a u -- show machine up time in status bar - [.. up since: 2020-09-29 15:58:51]
     C-a d -- show DAQ state (Default at launch) - [.. DAQ state: Idle]
 
  Other helpful screen keyboard shortcuts:
     C-a ? --- Show screen keyboard shortcuts
     C-a ESC - Scroll mode (hit ESC again to exit)
     C-a w --- Show all windows
+ 
+ -----------------------------------------------------------------------------------
+
+ Start/Monitor Data Collection:
+    $ screen -r ACBOX      # attach to screen session setup for ACBOX
+    $ config_daq           # interactive config
+    $ start_collect        # start data collection with config file
+    -- 
+    $ cli_spectrogram      # starts cli-spectrogram (no args uses DAQ config)
+    
+ Offloading Data:
+    $ screen -r ACBOX      # attach to screen session setup for ACBOX
+    $ rsync_all -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
+    --
+    $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
+
+ ACBOX screen session:
+    The ACBOX screen session has the following four windows:
+
+    0 - "cli":   [C-a 0] For running the cli-spectrogram
+    1 - "DAQ":   [C-a 1] For running the config_daq and start_collect processes
+    2 - "debug": [C-a 2] For debugging 
+    3 - "sync":  [C-a 3] For running rsync scripts and watching progress (if parallel)
+
+ To exit and detach:
+    C-a d -----> Detatches the screen session. All processes will continue running
+    $ exit ----> End ssh session
 
 END
 )
