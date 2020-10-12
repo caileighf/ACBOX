@@ -104,17 +104,8 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
 
  Helpful keyboard shortcuts and aliases:
     $ help         # show complete help message
-    $ has_fix      # find out if GPS has fix
-    C-a u -- show machine up time in status bar - [.. up since: 2020-09-29 15:58:51]
-    C-a d -- show DAQ state (Default at launch) - [.. DAQ state: Idle]
-
- Other helpful screen keyboard shortcuts:
-    C-a ? --- Show screen keyboard shortcuts
-    C-a ESC - Scroll mode (hit ESC again to exit)
-    C-a w --- Show all windows
+    $ show_welcome # show this message again
  
- -----------------------------------------------------------------------------------
-
  Start/Monitor Data Collection:
     $ screen -r ACBOX      # attach to screen session setup for ACBOX
     $ config_daq           # interactive config

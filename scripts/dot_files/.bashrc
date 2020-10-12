@@ -123,7 +123,8 @@ export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | 
 alias python=/home/pi/venv/bin/python
 
 alias on_ssh='$HOME/ACBOX/scripts/utils/auto_ssh_screen.sh'
-alias help='$HOME/ACBOX/scripts/debug/echo_help.sh'
+alias help='$HOME/ACBOX/scripts/debug/echo_help.sh | less'
+alias show_welcome='$HOME/ACBOX/scripts/debug/echo_help.sh welcome'
 alias help_cli='$HOME/ACBOX/scripts/debug/echo_help.sh --cli | less'
 alias help_daq='$HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less'
 alias help_debug='$HOME/ACBOX/scripts/debug/echo_help.sh --debug | less'
