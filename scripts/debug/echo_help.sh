@@ -135,9 +135,9 @@ END
 )
 
 USAGE=$(cat <<-END
- usage: ./echo-help.sh              # for BOTH help messages
-        ./echo-help.sh --mccdaq     # for MCC_DAQ help
-        ./echo-help.sh --cli        # for cli-spectrogram help
+ usage: ./echo-help.sh            # for BOTH help messages
+        ./echo-help.sh --mccdaq   # for MCC_DAQ help
+        ./echo-help.sh --cli      # for cli-spectrogram help
         ./echo-help.sh --help/-h  # print this usage message
 END
 )
