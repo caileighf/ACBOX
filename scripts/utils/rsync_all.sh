@@ -26,7 +26,7 @@ do
         DRY_RUN="--dry-run";
     elif [ ARG = '--help' ]; then
         echo -e "\n$USAGE\n"
-        return 1;
+        exit 1;
     fi
     shift;
 done
@@ -57,5 +57,3 @@ END
 echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 
 rsync -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" "$DRY_RUN"
-RC=$?
-echo $RC
