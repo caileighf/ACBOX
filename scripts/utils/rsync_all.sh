@@ -3,7 +3,6 @@ USAGE=$(cat <<-END
  usage: rsync_all.sh -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> [OPTIONAL-ARGS]
         [OPTIONAL-ARGS]:
         --dry-run ----> Run as dry run with no actual changes
-        --rsync-opts -> Additional rsync options (default -Phr)
 
 END
 )
@@ -17,7 +16,7 @@ do
     esac
 done
 
-DRY_RUN=""
+DRY_RUN=" "
 i=0;
 for ARG in "$@" 
 do
@@ -25,10 +24,6 @@ do
 
     if [ ARG = '--dry-run' ]; then
         DRY_RUN="--dry-run";
-    elif [ ARG = '--rsync-opts' ]; then
-        shift;
-        RSYNC_OPTS="$@"
-        break;
     elif [ ARG = '--help' ]; then
         echo -e "\n$USAGE\n"
         return 1;
@@ -38,8 +33,9 @@ done
 
 CONFIG_FILE=$(cat /home/pi/ACBOX/MCC_DAQ/config.json)
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
-HEADER=$(head -n "$DATA_DIRSINGLE_log.log")
-RSYNC_CMD="rsync -r -P -h "RSYNC_OPTS" "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run"
+HEADER=$(head -n 10 "${DATA_DIR}SINGLE_log.log")
+TEMP_LOG=".temp_rsync"
+RSYNC_CMD="rsync -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN}"
 PAYLOAD=$(cat <<-END
 
 This data was transferred on:
@@ -58,9 +54,8 @@ $ $RSYNC_CMD
 
 END
 )
-TEMP_LOG=".temp_rsync"
 echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 
-rsync -r -P -h "RSYNC_OPTS" "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run
+rsync -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" "$DRY_RUN"
 RC=$?
-return $RC
+echo $RC
