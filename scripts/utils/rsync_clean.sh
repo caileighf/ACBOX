@@ -38,8 +38,7 @@ TEMP_LOG=".temp_rsync"
 RSYNC_CMD="rsync -a -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN} --remove-source-files"
 PAYLOAD=$(cat <<-END
 
-This data was transferred on:
-    $(date)
+$(date)
 
 ACBOX USER: $USER
 ACBOX HOST: $HOSTNAME
