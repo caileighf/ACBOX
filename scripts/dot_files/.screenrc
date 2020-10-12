@@ -1,8 +1,8 @@
 # default windows
-screen -t 'cli'   0
-screen -t 'DAQ'   1
-screen -t 'debug' 2
-screen -t 'sync'  3
+screen -t 'DAQ'   0
+screen -t 'cli'   1
+screen -t 'sync'  2
+screen -t 'debug' 3
 
 zombie xy
 # Change Escape Combination to Ctrl+f (Ctrl+a is too useful to lose)
@@ -45,9 +45,6 @@ hardstatus alwayslastline
 hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
 # mouse tracking allows to switch region focus by clicking
 #mousetrack on
-
-# change vertical bar to be less bright
-rendition so =k
 
 # navigating regions with Ctrl-arrows
 bindkey "^[[1;5D" focus left

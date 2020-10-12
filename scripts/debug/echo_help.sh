@@ -122,10 +122,10 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
  ACBOX screen session:
     The ACBOX screen session has the following four windows:
 
-    0 - "cli":   [C-a 0] For running the cli-spectrogram
-    1 - "DAQ":   [C-a 1] For running the config_daq and start_collect processes
-    2 - "debug": [C-a 2] For debugging 
-    3 - "sync":  [C-a 3] For running rsync scripts and watching progress (if parallel)
+    0 - "DAQ":   [C-a 0] For running the cli-spectrogram
+    1 - "cli":   [C-a 1] For running the config_daq and start_collect processes
+    2 - "sync":  [C-a 2] For debugging 
+    3 - "debug": [C-a 3] For running rsync scripts and watching progress (if parallel)
 
  To exit and detach:
     C-a d -----> Detatches the screen session. All processes will continue running
