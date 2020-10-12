@@ -25,7 +25,7 @@ do
         u) REMOTE_USER=${OPTARG};;
         i) REMOTE_IP=${OPTARG};;
         d) REMOTE_DEST=${OPTARG};;
-        s) SECONDS=${OPTARG};;
+        s) FREQ_SECONDS=${OPTARG};;
     esac
 done
 
@@ -56,6 +56,6 @@ echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
 while [ "$DAQ_STATE" = "Running" ]; do
     rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG"
-    echo -e "\n$(date) --> rsync will start again in $SECONDS second(s)\n" | tee "$TEMP_LOG"
+    echo -e "\n$(date) --> rsync will start again in $FREQ_SECONDS second(s)\n" | tee "$TEMP_LOG"
     sleep "$SECONDS";
 done
