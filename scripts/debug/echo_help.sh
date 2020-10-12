@@ -117,7 +117,7 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
     $ screen -R ACBOX      # attach to screen session setup for ACBOX
     $ rsync_all -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
     --
-    $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
+    $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> -s <FREQ-SEC>
 
  ACBOX screen session:
     The ACBOX screen session has the following four windows:
