@@ -162,7 +162,7 @@ if [[ "$#" = 0 ]] ; then
     print_help
 elif [[ "$1" = "welcome" ]] ; then
     PRINT_HEADER=false
-    printf "\n$WELCOME"
+    printf "\n$WELCOME\n"
 else
     for ARG in "$@"; do
         # check for known args
