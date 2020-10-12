@@ -54,8 +54,7 @@ END
 echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
 
 DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
-echo "$DAQ_STATE"
-while [ DAQ_STATE = "Running" ]; do
+while [ "$DAQ_STATE" -eq "Running" ]; do
     rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG"
     echo -e "\n$(date) --> rsync will start again in $SECONDS second(s)\n" | tee "$TEMP_LOG"
     sleep "$SECONDS";
