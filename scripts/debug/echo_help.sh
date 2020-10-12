@@ -107,14 +107,14 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
     $ show_welcome # show this message again
  
  Start/Monitor Data Collection:
-    $ screen -r ACBOX      # attach to screen session setup for ACBOX
+    $ screen -R ACBOX      # attach to screen session setup for ACBOX
     $ config_daq           # interactive config
     $ start_collect        # start data collection with config file
     -- 
     $ cli_spectrogram      # starts cli-spectrogram (no args uses DAQ config)
     
  Offloading Data:
-    $ screen -r ACBOX      # attach to screen session setup for ACBOX
+    $ screen -R ACBOX      # attach to screen session setup for ACBOX
     $ rsync_all -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
     --
     $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
