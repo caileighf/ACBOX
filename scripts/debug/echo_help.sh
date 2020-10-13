@@ -132,6 +132,13 @@ OFFLOAD_HELP=$(cat <<-END
 END
 )
 
+SCREEN_MSG=$(cat <<-END
+    ====================================================
+    = YOU ARE CURRENTLY IN THE ACBOX SCREEN SESSION... =
+    ====================================================
+
+END
+)
 
 WELCOME=$(cat <<-END
 $(cat $HOME/ACBOX/scripts/banner.txt)
@@ -211,6 +218,9 @@ else
             MSG="$DEBUG_HELP"
         elif [ "$ARG" = "--offload" ]; then
             MSG="$OFFLOAD_HELP"
+        elif [ "$ARG" = "--screen" ]; then 
+            printf "\n$WELCOME\n$HERE\n"
+            kill -SIGINT $$
         else 
             printf "$USAGE\n"
             kill -SIGINT $$

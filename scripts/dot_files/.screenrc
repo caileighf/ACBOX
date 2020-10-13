@@ -2,7 +2,9 @@
 screen -t 'DAQ'   0
 screen -t 'cli'   1
 screen -t 'sync'  2
-screen -t 'debug' 3 $HOME/ACBOX/scripts/debug/echo_help.sh welcome
+screen -t 'debug' 3
+select 3
+stuff "$HOME/ACBOX/scripts/debug/echo_help.sh --screen^M"
 
 zombie xy
 # Change Escape Combination to Ctrl+f (Ctrl+a is too useful to lose)
