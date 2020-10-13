@@ -55,7 +55,7 @@ DEBUG_HELP=$(cat <<-END
             C-a s -- show volume on RPi headphone jack --- [$USER@$HOSTNAME | volume: -20.00dB]
             C-a m -- show available disk space ----------- [$USER@$HOSTNAME | free space: 53G]
             C-a u -- show machine up time ---------------- [$USER@$HOSTNAME | up since: 2020-09-29 15:58:51]
-            C-a d -- show DAQ state (Default at launch) -- [$USER@$HOSTNAME | DAQ state: Idle]
+            C-a D -- show DAQ state (Default at launch) -- [$USER@$HOSTNAME | DAQ state: Idle]
  
         Other helpful screen keyboard shortcuts:
             C-a ? --- Show screen keyboard shortcuts
