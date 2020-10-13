@@ -40,7 +40,7 @@ do
         DRY_RUN=true;
     elif [ ARG = '--help' ]; then
         echo -e "\n$USAGE\n"
-        exit 1;
+        kill -SIGINT $$
     fi
     shift;
 done
@@ -73,4 +73,12 @@ if [ "$DRY_RUN" = true ]; then
     rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG" --dry-run
 else
     rsync -a -r -P -h -v "$DATA_DIR" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --log-file "$TEMP_LOG"
+    
+    echo "Would you like the log file or \"receipt\" for this transaction transferred as well?"
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) rsync -a -r -P -h -v "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --remove-source-files; break;;
+            No ) kill -SIGINT $$;;
+        esac
+    done
 fi

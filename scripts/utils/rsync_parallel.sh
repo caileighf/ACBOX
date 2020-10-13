@@ -15,7 +15,7 @@ do
         DRY_RUN=true;
     elif [ ARG = '--help' ]; then
         echo -e "\n$USAGE\n"
-        exit 1;
+        kill -SIGINT $$
     fi
 done
 
@@ -68,4 +68,12 @@ while [ "$DAQ_STATE" = "Running" ]; do
     echo -e "\n$(date) --> rsync will start again in $FREQ_SECONDS second(s)\n" | tee "$TEMP_LOG"
     sleep "$SECONDS";
     DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
+done
+
+echo "Would you like the log file or \"receipt\" for this transaction transferred as well?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) rsync -a -r -P -h -v "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --remove-source-files; break;;
+        No ) kill -SIGINT $$;;
+    esac
 done
