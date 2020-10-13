@@ -5,5 +5,5 @@
 
 # Only run if we are not already inside a running screen and only if in an SSH session.
 if [[ -z "${STY}" && ! -z "${SSH_CLIENT}" ]]; then
-  screen -rd ACBOX || screen -S ACBOX
+  screen -R ACBOX
 fi

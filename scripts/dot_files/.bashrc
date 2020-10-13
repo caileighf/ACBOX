@@ -147,4 +147,4 @@ alias has_pps="gpspipe -n 3 -w | grep 'WATCH' | grep -oE 'pps\":true' > /dev/nul
 alias see_daq="lsusb | grep 'Measurement Computing Corp' > /dev/null && echo 'DAQ Connected' || echo 'DAQ Not Found'"
 
 # Commands that run at the start of every session
-# on_ssh
+on_ssh
