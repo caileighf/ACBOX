@@ -69,7 +69,8 @@ bind F eval "caption always"    "hardstatus alwayslastline"
 bind t eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %3`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind m eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| free space: %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| volume: %5`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind l eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| cpu load: %l%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind D eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 
 # F2 puts Screen into resize mode. Resize regions using hjkl keys.
