@@ -219,7 +219,7 @@ else
         elif [ "$ARG" = "--offload" ]; then
             MSG="$OFFLOAD_HELP"
         elif [ "$ARG" = "--screen" ]; then 
-            printf "\n$WELCOME\n$HERE\n"
+            printf "\n$WELCOME\n$SCREEN_MSG\n"
             kill -SIGINT $$
         else 
             printf "$USAGE\n"
