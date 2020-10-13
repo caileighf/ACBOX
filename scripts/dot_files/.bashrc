@@ -134,7 +134,7 @@ alias get_cpu_temp='$HOME/ACBOX/scripts/status/get_cpu_temp.sh'
 alias get_free_mem='$HOME/ACBOX/scripts/status/get_free_mem.sh'
 alias get_volume='$HOME/ACBOX/scripts/status/get_volume.sh Headphone'
 alias cli_spectrogram='python /home/$HOME/ACBOX/cli-spectrogram/cli-spectrogram/cli_spectrogram.py'
-alias config_daq='cd $HOME/ACBOX/MCC_DAQ/; $HOME/ACBOX/MCC_DAQ/config_daq.sh'
+alias config_daq='cd $HOME/ACBOX/MCC_DAQ/; $HOME/ACBOX/MCC_DAQ/config_daq.py'
 alias start_collect='cd $HOME/ACBOX/MCC_DAQ/; $HOME/ACBOX/MCC_DAQ/start_collect'
 alias daq_state='$HOME/ACBOX/scripts/status/get_daq_state.sh'
 
