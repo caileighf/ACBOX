@@ -125,7 +125,7 @@ alias python=$HOME/venv/bin/python
 alias cddaq='cd $HOME/ACBOX/MCC_DAQ'
 alias cddata='cd $HOME/ACBOX/MCC_DAQ/data'
 
-alias less='less -R'
+alias less='less -RFK -P "(Exit -- Q)"' # expand escape chars, quit if entire file fits in window, allow ctrl+c to quit, status
 alias on_ssh='$HOME/ACBOX/scripts/utils/auto_ssh_screen.sh'
 alias help='$HOME/ACBOX/scripts/debug/echo_help.sh | less'
 alias show_welcome='$HOME/ACBOX/scripts/debug/echo_help.sh welcome'
