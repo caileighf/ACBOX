@@ -36,7 +36,7 @@ defscrollback 10000
 caption always "%{= Kw}%-w%{+b y}%n %t%{-b Kw}%+w %=%"
 
 # check if GPS has fix once a min
-backtick 1 2 2 $HOME/ACBOX/scripts/status/get_fix.sh > /dev/null && $HOME/ACBOX/scripts/status/get_loc.sh || $HOME/ACBOX/scripts/status/get_fix.sh
+backtick 1 20 20 $HOME/ACBOX/scripts/status/get_loc_status.sh
 # check up time once an hour
 backtick 2 3600 3600 uptime
 # show cpu temp (C-a t)
