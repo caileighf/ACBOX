@@ -2,7 +2,7 @@
 screen -t 'DAQ'   0
 screen -t 'cli'   1
 screen -t 'sync'  2
-screen -t 'debug' 3
+screen -t 'debug' 3 $HOME/ACBOX/scripts/debug/echo_help.sh welcome
 
 zombie xy
 # Change Escape Combination to Ctrl+f (Ctrl+a is too useful to lose)
@@ -21,14 +21,14 @@ defscrollback 10000
 # look and feel for the bottom two lines.
 #
 # Customize the status line
-caption always '%{= Kw}%w'
+caption always "%{= Kw}%-w%{+b y}%n %t%{-b Kw}%+w %=%"
 
 # check if GPS has fix once a min
 backtick 1 60 60 $HOME/ACBOX/scripts/status/get_fix.sh > /dev/null\
  && $HOME/ACBOX/scripts/status/get_loc.sh\
   || $HOME/ACBOX/scripts/status/get_fix.sh
 # check up time once an hour
-backtick 2 3600 3600 uptime -s
+backtick 2 3600 3600 uptime
 # show cpu temp (C-a t)
 backtick 3 10 10 $HOME/ACBOX/scripts/status/get_cpu_temp.sh
 # show free space (C-a m)
@@ -60,7 +60,7 @@ bind F eval "caption always"    "hardstatus alwayslastline"
 bind t eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %3`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind m eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| free space: %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| volume: %5`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind D eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 
 # F2 puts Screen into resize mode. Resize regions using hjkl keys.
