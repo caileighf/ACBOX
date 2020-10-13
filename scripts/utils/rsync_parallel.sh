@@ -34,6 +34,7 @@ done
 
 if ((OPTIND == 1)); then
     echo "No options specified";
+    echo "$USAGE";
     kill -SIGINT $$
 fi
 
