@@ -29,7 +29,7 @@ do
     esac
 done
 
-CONFIG_FILE=$(cat /home/pi/ACBOX/MCC_DAQ/config.json)
+CONFIG_FILE=$(cat $HOME/ACBOX/MCC_DAQ/config.json)
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
 HEADER=$(head -n 10 "${DATA_DIR}/SINGLE_log.log")
 TEMP_LOG=".temp_rsync"

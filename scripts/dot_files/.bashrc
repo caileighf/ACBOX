@@ -120,7 +120,7 @@ export PATH=$PATH:~/ACBOX/MCC_DAQ:~/ACBOX/MCC_DAQ/test:~/ACBOX/MCC_DAQ/scripts
 export PYTHON_EXE=~/venv/bin/python
 export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]" >> ~/shell_history'
 
-alias python=/home/pi/venv/bin/python
+alias python=$HOME/venv/bin/python
 
 alias on_ssh='$HOME/ACBOX/scripts/utils/auto_ssh_screen.sh'
 alias help='$HOME/ACBOX/scripts/debug/echo_help.sh | less'
@@ -128,12 +128,13 @@ alias show_welcome='$HOME/ACBOX/scripts/debug/echo_help.sh welcome'
 alias help_cli='$HOME/ACBOX/scripts/debug/echo_help.sh --cli | less'
 alias help_daq='$HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less'
 alias help_debug='$HOME/ACBOX/scripts/debug/echo_help.sh --debug | less'
+alias help_offload='$HOME/ACBOX/scripts/debug/echo_help.sh --offload | less'
 alias get_loc='$HOME/ACBOX/scripts/status/get_loc.sh'
 alias get_cpu_temp='$HOME/ACBOX/scripts/status/get_cpu_temp.sh'
 alias get_free_mem='$HOME/ACBOX/scripts/status/get_free_mem.sh'
 alias get_volume='$HOME/ACBOX/scripts/status/get_volume.sh Headphone'
-alias cli_spectrogram='python /home/pi/ACBOX/cli-spectrogram/cli-spectrogram/cli_spectrogram.py'
-alias config_daq='cd $HOME/ACBOX/MCC_DAQ/; $HOME/ACBOX/MCC_DAQ/config_daq'
+alias cli_spectrogram='python /home/$HOME/ACBOX/cli-spectrogram/cli-spectrogram/cli_spectrogram.py'
+alias config_daq='cd $HOME/ACBOX/MCC_DAQ/; $HOME/ACBOX/MCC_DAQ/config_daq.sh'
 alias start_collect='cd $HOME/ACBOX/MCC_DAQ/; $HOME/ACBOX/MCC_DAQ/start_collect'
 alias daq_state='$HOME/ACBOX/scripts/status/get_daq_state.sh'
 

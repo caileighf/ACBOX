@@ -22,6 +22,7 @@ DEBUG_HELP=$(cat <<-END
             $ help_cli     # show cli-spectrogram help message | less
             $ help_daq     # show MCC_DAQ driver help message | less
             $ help_debug   # show THIS help message | less
+            $ help_offload # show data offload help message | less
             $ get_volume   # get volume on RPi headphone jack
             $ get_cpu_temp # get cpu temp in celsius
             $ get_free_mem # get remaining disk space
@@ -99,6 +100,38 @@ MCCDAQ_HELP=$(cat <<-END
 END
 )
 
+
+OFFLOAD_HELP=$(cat <<-END
+     The following rsync scripts are for ease of offloading/transferring data
+     to a remote machine. They will not create duplicate files on the remote machine so.
+     Running any of these scripts with --dry-run
+
+        rsync_all --------> Transfer all data files using the data directory ..
+                            .. in the config.json file for the DAQ (.../MCC_DAQ/config.json)
+                            It will NOT delete files on source or remote machine
+
+        rsync_clean ------> Transfer all data files using the data directory ..
+                            .. in the config.json file for the DAQ (.../MCC_DAQ/config.json)
+                            It will not delete files on the remote machine 
+                            * IT WILL DELETE FILES ON SOURCE MACHINE IN DATA-DIR AFTER TRANSFER *
+
+        rsync_parallel ---> Starts a transfer periodically (-s <FREQ-SEC>)
+                            It will NOT delete files on source or remote machine
+
+     Offloading/Transferring Data:
+        $ screen -R ACBOX      # attach to screen session setup for ACBOX
+        $ rsync_all -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
+        $ rsync_clean -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
+
+        ------------- SSH keys need to be setup for the parallel rsync mode -------------
+        -- This avoids the process being blocked while waiting for the remote password --
+        ---------------------------------------------------------------------------------
+        $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> -s <FREQ-SEC>
+
+END
+)
+
+
 WELCOME=$(cat <<-END
 $(cat $HOME/ACBOX/scripts/banner.txt)
 
@@ -154,6 +187,8 @@ $MCCDAQ_HELP\n\
     $HLINE\n\
 $CLI_HELP\n\
     $HLINE\n\
+$OFFLOAD_HELP\n\
+    $HLINE\n\
 $DEBUG_HELP\n";
 }
 
@@ -172,6 +207,8 @@ else
             MSG="$CLI_HELP"
         elif [ "$ARG" = "--debug" ]; then
             MSG="$DEBUG_HELP"
+        elif [ "$ARG" = "--offload" ]; then
+            MSG="$OFFLOAD_HELP"
         else 
             printf "$USAGE\n"
             break;
