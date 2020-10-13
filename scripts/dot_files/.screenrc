@@ -36,9 +36,7 @@ defscrollback 10000
 caption always "%{= Kw}%-w%{+b y}%n %t%{-b Kw}%+w %=%"
 
 # check if GPS has fix once a min
-backtick 1 60 60 $HOME/ACBOX/scripts/status/get_fix.sh > /dev/null\
- && $HOME/ACBOX/scripts/status/get_loc.sh\
-  || $HOME/ACBOX/scripts/status/get_fix.sh
+backtick 1 2 2 $HOME/ACBOX/scripts/status/get_fix.sh > /dev/null && $HOME/ACBOX/scripts/status/get_loc.sh || $HOME/ACBOX/scripts/status/get_fix.sh
 # check up time once an hour
 backtick 2 3600 3600 uptime
 # show cpu temp (C-a t)
@@ -48,7 +46,7 @@ backtick 4 10 10 $HOME/ACBOX/scripts/status/get_free_mem.sh
 # show volume (C-a s)
 backtick 5 10 10 $HOME/ACBOX/scripts/status/get_volume.sh Headphone
 # show daq state (C-a D) every 10 seconds
-backtick 6 10 10 $HOME/ACBOX/scripts/status/get_daq_state.sh
+backtick 6 1 5 $HOME/ACBOX/scripts/status/get_daq_state.sh
 
 # echo minimal location (lat/lon) with google map link
 # backtick 3 30 30 $HOME/ACBOX/scripts/status/get_loc.sh
