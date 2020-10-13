@@ -26,8 +26,16 @@ do
         i) REMOTE_IP=${OPTARG};;
         d) REMOTE_DEST=${OPTARG};;
         s) FREQ_SECONDS=${OPTARG};;
+        \? ) echo "Unknown option: -$OPTARG" >&2; ;;
+        :  ) echo "Missing option argument for -$OPTARG" >&2; ;;
+        *  ) echo "Unimplemented option: -$OPTARG" >&2; ;;
     esac
 done
+
+if ((OPTIND == 1)); then
+    echo "No options specified";
+    kill -SIGINT $$
+fi
 
 CONFIG_FILE=$(cat $HOME/ACBOX/MCC_DAQ/config.json)
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )

@@ -18,8 +18,16 @@ do
         i) REMOTE_IP=${OPTARG};;
         d) REMOTE_DEST=${OPTARG};;
         f) CONFIG_FILE=$(cat ${OPTARG});;
+        \? ) echo "Unknown option: -$OPTARG" >&2; ;;
+        :  ) echo "Missing option argument for -$OPTARG" >&2; ;;
+        *  ) echo "Unimplemented option: -$OPTARG" >&2; ;;
     esac
 done
+
+if ((OPTIND == 1)); then
+    echo "No options specified";
+    kill -SIGINT $$
+fi
 
 DRY_RUN=false
 i=0;

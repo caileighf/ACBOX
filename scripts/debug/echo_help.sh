@@ -211,7 +211,7 @@ else
             MSG="$OFFLOAD_HELP"
         else 
             printf "$USAGE\n"
-            break;
+            kill -SIGINT $$
         fi
 
         # print header on first iter
