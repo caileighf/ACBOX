@@ -6,9 +6,9 @@ screen -t 'debug' 3
 screen -t 'welcome' 4
 
 select 0
-stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh | less  --mccdaq^M"
+stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less^M"
 select 1
-stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh | less  --cli^M"
+stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --cli | less^M"
 select 2
 stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --offload | less ^M"
 select 3
