@@ -4,14 +4,17 @@
 PRINT_HEADER=true
 HEADER=$(cat <<-END
     ------------------------------------------------------
-    | Help Message for the Acoustic Data Acquisition Box |
+    | \033[1mHelp Message for the Acoustic Data Acquisition Box\033[0m |
     ------------------------------------------------------
 END
 )
 
 DEBUG_HELP=$(cat <<-END
+     \033[1mDEBUGGING INFO AND HELPFUL SHORTCUTS\033[0m
+     ------------------------------------
+ 
      Remote Debugging Help/Tools:
-
+ 
         Useful aliases: (type directly from the prompt)
             $ has_fix      # find out if GPS has fix
             $ has_pps      # find out if PPS is being used
@@ -26,14 +29,14 @@ DEBUG_HELP=$(cat <<-END
             $ get_volume   # get volume on RPi headphone jack
             $ get_cpu_temp # get cpu temp in celsius
             $ get_free_mem # get remaining disk space
-
+ 
         GNU screen status bar section info
             1. [$USER@$HOST | DAQ state: Idle]
                 |     |            |
                 |     |            -- User selectable (see next table)
                 |     --------------- Host machine
                 --------------------- Current user
-
+ 
             2. no fix state: [    GPS HAS NO FIX    ]
                gpsd error:   [      No GPS data     ]
                fix state: 
@@ -42,17 +45,18 @@ DEBUG_HELP=$(cat <<-END
                 |           |               --- URL to google maps location
                 |           ------------------- Longitude (Decimal Degrees)
                 ------------------------------- Latitude (Decimal Degrees)
-
+ 
             3. [system time: 10/11/20 14:50:17] -- Current system date/time
-
+ 
         Change screen session status bar:
          * C-a --> Ctrl + a
-            C-a t -- show cpu temp ----------------------- [$USER@$HOSTNAME | cpu temp: ]
-            C-a s -- show volume on RPi headphone jack --- [$USER@$HOSTNAME | DAQ state: Idle]
-            C-a m -- show available disk space ----------- [$USER@$HOSTNAME | DAQ state: Idle]
+            C-a t -- show cpu temp ----------------------- [$USER@$HOSTNAME | cpu temp: 49.4'C]
+            C-a l -- show system load -------------------- [$USER@$HOSTNAME | cpu load: 0.02 0.14 0.10]
+            C-a s -- show volume on RPi headphone jack --- [$USER@$HOSTNAME | volume: -20.00dB]
+            C-a m -- show available disk space ----------- [$USER@$HOSTNAME | free space: 53G]
             C-a u -- show machine up time ---------------- [$USER@$HOSTNAME | up since: 2020-09-29 15:58:51]
             C-a d -- show DAQ state (Default at launch) -- [$USER@$HOSTNAME | DAQ state: Idle]
-
+ 
         Other helpful screen keyboard shortcuts:
             C-a ? --- Show screen keyboard shortcuts
             C-a ESC - Scroll mode (hit ESC again to exit)
@@ -61,16 +65,19 @@ DEBUG_HELP=$(cat <<-END
                       Resize regions using hjkl keys
             C-a f --- Hide both status bars
             C-a F --- Show both status bars
-
+ 
 END
 )
 
 CLI_HELP=$(cat <<-END
+     \033[1mUSING THE CLI-SPECTROGRAM\033[0m
+    -------------------------
+ 
      Start Command Line Spectrogram:
-
+ 
         $ cli_spectrogram [OPTIONS] # alias to launch cli_spectrogram.py
         $ cli_spectrogram_auto      # starts cli-spectrogram with DAQ config file
-
+ 
         Useful shortcuts: 
             "f" -----> Toggle fullscreen
             "c" -----> Cycle through channels
@@ -90,11 +97,14 @@ END
 )
 
 MCCDAQ_HELP=$(cat <<-END
+     \033[1mSTART COLLECTING DATA\033[0m
+     ---------------------
+ 
      Start Acoustic Data Collection:
-
+ 
         Default data directory:
         /home/$USER/ACBOX/MCC_DAQ/data/ 
-
+ 
         Commands:
             $ config_daq    # Interactive config
             $ start_collect # Start data acquisition
@@ -103,52 +113,60 @@ END
 
 
 OFFLOAD_HELP=$(cat <<-END
+     \033[1mOFFLOADING/TRANSFERRING DATA\033[0m
+     ----------------------------
+ 
      The following rsync scripts are for ease of offloading/transferring data
      to a remote machine. They will not create duplicate files on the remote machine so.
      Running any of these scripts with --dry-run
-
+   
         rsync_all --------> Transfer all data files using the data directory ..
                             .. in the config.json file for the DAQ (.../MCC_DAQ/config.json)
                             It will NOT delete files on source or remote machine
-
+ 
         rsync_clean ------> Transfer all data files using the data directory ..
                             .. in the config.json file for the DAQ (.../MCC_DAQ/config.json)
                             It will not delete files on the remote machine 
-                            * IT WILL DELETE FILES ON SOURCE MACHINE IN DATA-DIR AFTER TRANSFER *
-
+                            \033[1m* FILES WILL BE DELETED ON SOURCE MACHINE AFTER TRANSFER *\033[0m
+ 
         rsync_parallel ---> Starts a transfer periodically (-s <FREQ-SEC>)
                             It will NOT delete files on source or remote machine
-
+ 
      Offloading/Transferring Data:
         $ screen -R ACBOX      # attach to screen session setup for ACBOX
         $ rsync_all -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
         $ rsync_clean -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
-
-        ------------- SSH keys need to be setup for the parallel rsync mode -------------
-        -- This avoids the process being blocked while waiting for the remote password --
-        ---------------------------------------------------------------------------------
+ 
+        ---------------- SSH keys need to be setup for the parallel rsync mode ----------------
+        ----- This avoids the process being blocked while waiting for the remote password -----
+        ---------------------------------------------------------------------------------------
         $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> -s <FREQ-SEC>
+ 
+END
+)
 
+HLINE=$(cat <<-END
+\n    --------------------------------------------------
 END
 )
 
 SCREEN_MSG=$(cat <<-END
-
+\033[1m
 ==========================================================================================
 ==================== YOU ARE CURRENTLY IN THE ACBOX SCREEN SESSION... ====================
 ==========================================================================================
-
+\033[0m
 END
 )
 
 WELCOME=$(cat <<-END
 $(cat $HOME/ACBOX/scripts/banner.txt)
 
- Helpful keyboard shortcuts and aliases:
+ \033[1mHelpful keyboard shortcuts and aliases:\033[0m
     $ help         # show complete help message
     $ show_welcome # show this message again
  
- Start/Monitor Data Collection:
+ \033[1mStart/Monitor Data Collection:\033[0m
     $ screen -R ACBOX      # attach to screen session setup for ACBOX
     $ config_daq           # interactive config
     $ start_collect        # start data collection with config file
@@ -156,13 +174,13 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
     $ cli_spectrogram      # starts cli-spectrogram 
     $ cli_spectrogram_auto # starts cli-spectrogram with DAQ config file
     
- Offloading Data:
+ \033[1mOffloading Data:\033[0m
     $ screen -R ACBOX      # attach to screen session setup for ACBOX
     $ rsync_all -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
     --
     $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> -s <FREQ-SEC>
 
- ACBOX screen session:
+ \033[1mACBOX screen session:\033[0m
     The ACBOX screen session has the following four windows:
 
     0 - "DAQ":   [C-a 0] For running the cli-spectrogram
@@ -170,7 +188,7 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
     2 - "sync":  [C-a 2] For debugging 
     3 - "debug": [C-a 3] For running rsync scripts and watching progress (if parallel)
 
- To exit and detach:
+ \033[1mTo exit and detach:\033[0m
     C-a d -----> Detatches the screen session. All processes will continue running
     $ exit ----> End ssh session
 
@@ -185,19 +203,14 @@ USAGE=$(cat <<-END
 END
 )
 
-HLINE=$(cat <<-END
-\n     ----------------------------------------------------\n
-END
-)
-
 function print_help {
     echo -e "\n\
 $HEADER\n\
-$MCCDAQ_HELP\n\
+$MCCDAQ_HELP\
     $HLINE\n\
-$CLI_HELP\n\
+$CLI_HELP\
     $HLINE\n\
-$OFFLOAD_HELP\n\
+$OFFLOAD_HELP\
     $HLINE\n\
 $DEBUG_HELP\n";
 }

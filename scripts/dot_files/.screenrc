@@ -4,14 +4,14 @@ screen -t 'cli'   1
 screen -t 'sync'  2
 screen -t 'debug' 3
 
+select 3
+stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh --screen^M"
+select 2
+stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --offload^M"
 select 0
 stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq^M"
 select 1
 stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --cli^M"
-select 2
-stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --offload^M"
-select 3
-stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh --screen^M"
 
 zombie xy
 # Change Escape Combination to Ctrl+f (Ctrl+a is too useful to lose)
