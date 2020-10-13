@@ -70,8 +70,8 @@ END
 )
 
 CLI_HELP=$(cat <<-END
-    \033[1mUSING THE CLI-SPECTROGRAM\033[0m
-    -------------------------
+     \033[1mUSING THE CLI-SPECTROGRAM\033[0m
+     -------------------------
  
      Start Command Line Spectrogram:
  
