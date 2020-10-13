@@ -68,7 +68,8 @@ END
 CLI_HELP=$(cat <<-END
      Start Command Line Spectrogram:
 
-        $ cli_spectrogram [OPTIONS]
+        $ cli_spectrogram [OPTIONS] # alias to launch cli_spectrogram.py
+        $ cli_spectrogram_auto      # starts cli-spectrogram with DAQ config file
 
         Useful shortcuts: 
             "f" -----> Toggle fullscreen
@@ -144,7 +145,8 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
     $ config_daq           # interactive config
     $ start_collect        # start data collection with config file
     -- 
-    $ cli_spectrogram      # starts cli-spectrogram (no args uses DAQ config)
+    $ cli_spectrogram      # starts cli-spectrogram 
+    $ cli_spectrogram_auto # starts cli-spectrogram with DAQ config file
     
  Offloading Data:
     $ screen -R ACBOX      # attach to screen session setup for ACBOX
