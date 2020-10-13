@@ -108,6 +108,7 @@ MCCDAQ_HELP=$(cat <<-END
         Commands:
             $ config_daq    # Interactive config
             $ start_collect # Start data acquisition
+            $ kill_daq      # Kill DAQ (same as Ctrl+c in shell where it was started)
 END
 )
 

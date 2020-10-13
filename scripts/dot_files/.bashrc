@@ -141,6 +141,7 @@ alias cli_spectrogram='python $HOME/ACBOX/cli-spectrogram/cli-spectrogram/cli_sp
 alias cli_spectrogram_auto='python $HOME/ACBOX/cli-spectrogram/cli-spectrogram/cli_spectrogram.py --use-config'
 alias config_daq='cd $HOME/ACBOX/MCC_DAQ/; $PYTHON_EXE $HOME/ACBOX/MCC_DAQ/config_daq.py'
 alias start_collect='cd $HOME/ACBOX/MCC_DAQ/; $HOME/ACBOX/MCC_DAQ/start_collect' || echo "start_collect FAILED"
+alias kill_daq='$HOME/ACBOX/scripts/utils/kill_daq.sh'
 alias daq_state='$HOME/ACBOX/scripts/status/get_daq_state.sh'
 
 alias has_fix="gpspipe -n 4 -w | grep 'TPV' | grep -oE 'mode\":0,|mode\":1,' > /dev/null && echo 'GPS HAS NO FIX' || echo 'GPS HAS FIX'"
