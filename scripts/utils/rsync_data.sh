@@ -59,7 +59,7 @@ fi
 CLEAN=false
 PARALLEL=false
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
-HEADER=$(head -n 10 "${DATA_DIR}SINGLE_log.log")
+HEADER=$(head -n 10 "${DATA_DIR}/SINGLE_log.log")
 TEMP_LOG=".temp_rsync"
 RSYNC_CMD=" -arPhv --log-file ${TEMP_LOG}"
 
