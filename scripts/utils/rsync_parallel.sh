@@ -1,11 +1,16 @@
 #!/bin/bash
 USAGE=$(cat <<-END
  usage: rsync_parallel.sh -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> -s <FREQ-SECONDS>
+    [OPTIONAL-ARGS]:
+    --include-gps --> Include gps data in transfer
 
 END
 )
 
 DRY_RUN=false
+CONFIG_FILE=$(cat $HOME/ACBOX/MCC_DAQ/config.json)
+DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
+
 i=0;
 for ARG in "$@" 
 do
@@ -13,6 +18,8 @@ do
 
     if [ ARG = '--dry-run' ]; then
         DRY_RUN=true;
+    elif [ ARG = '--include-gps' ]; then
+        DATA_DIR="${DATA_DIR} ${GPS_DATA_DIR}"
     elif [ ARG = '--help' ]; then
         echo -e "\n$USAGE\n"
         kill -SIGINT $$
@@ -38,8 +45,6 @@ if ((OPTIND == 1)); then
     kill -SIGINT $$
 fi
 
-CONFIG_FILE=$(cat $HOME/ACBOX/MCC_DAQ/config.json)
-DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
 HEADER=$(head -n 10 "${DATA_DIR}/SINGLE_log.log")
 TEMP_LOG=".temp_rsync"
 RSYNC_CMD="rsync -a -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN}"

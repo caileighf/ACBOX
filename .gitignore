@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 ./scripts/**/.temp_rsync
+./gps_logger/data/*.*
+./gps_logger/logs/*.*

@@ -120,6 +120,9 @@ export PATH=$PATH:~/ACBOX/MCC_DAQ:~/ACBOX/MCC_DAQ/test:~/ACBOX/MCC_DAQ/scripts
 export PYTHON_EXE=~/venv/bin/python
 export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | sed "s/^[ ]*[0-9]\+[ ]*//" ) [$RETRN_VAL]" >> ~/shell_history'
 
+export GPS_DATA_DIR=~/ACBOX/gps_logger/data
+export GPS_LOG_DIR=~/ACBOX/gps_logger/logs
+
 alias python=$HOME/venv/bin/python
 
 alias cddaq='cd $HOME/ACBOX/MCC_DAQ'

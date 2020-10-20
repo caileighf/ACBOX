@@ -1,14 +1,14 @@
 # default windows
-screen -t 'DAQ'   0
-screen -t 'cli'   1
-screen -t 'sync'  2
-screen -t 'debug' 3
+screen -t 'DAQ'     0
+screen -t 'cli'     1
+screen -t 'sync'    2
+screen -t 'debug'   3
 screen -t 'welcome' 4
 
 select 0
-stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less^M"
+stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less ^M"
 select 1
-stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --cli | less^M"
+stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --cli | less ^M"
 select 2
 stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --offload | less ^M"
 select 3
@@ -28,25 +28,25 @@ vbell off
 
 # Set scrollback buffer to 10000
 defscrollback 10000
-
+nonblock on
 #
 # look and feel for the bottom two lines.
 #
 # Customize the status line
 caption always "%{= Kw}%-w%{+b y}%n %t%{-b Kw}%+w %=%"
 
-# check if GPS has fix once a min
-backtick 1 20 20 $HOME/ACBOX/scripts/status/get_loc_status.sh
+# check if GPS has fix once a min # can be computationally expensive to run more frequently
+backtick 1 60 5 $HOME/ACBOX/scripts/status/get_loc_status.sh
 # check up time once an hour
 backtick 2 3600 3600 uptime
 # show cpu temp (C-a t)
-backtick 3 10 10 $HOME/ACBOX/scripts/status/get_cpu_temp.sh
+backtick 3 60 5 $HOME/ACBOX/scripts/status/get_cpu_temp.sh
 # show free space (C-a m)
-backtick 4 10 10 $HOME/ACBOX/scripts/status/get_free_mem.sh
+backtick 4 60 5 $HOME/ACBOX/scripts/status/get_free_mem.sh
 # show volume (C-a s)
-backtick 5 10 10 $HOME/ACBOX/scripts/status/get_volume.sh Headphone
+backtick 5 60 5 $HOME/ACBOX/scripts/status/get_volume.sh Headphone
 # show daq state (C-a D) every 10 seconds
-backtick 6 1 5 $HOME/ACBOX/scripts/status/get_daq_state.sh
+backtick 6 60 5 $HOME/ACBOX/scripts/status/get_daq_state.sh
 
 # echo minimal location (lat/lon) with google map link
 # backtick 3 30 30 $HOME/ACBOX/scripts/status/get_loc.sh
@@ -73,6 +73,8 @@ bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| volu
 bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind l eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| cpu load: %l%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind D eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+
+bind 
 
 # F2 puts Screen into resize mode. Resize regions using hjkl keys.
 bindkey "^[OQ" eval "command -c rsz" # enter resize mode
