@@ -200,8 +200,9 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
 
     0 - "DAQ":   [C-a 0] For running the cli-spectrogram
     1 - "cli":   [C-a 1] For running the config_daq and start_collect processes
-    2 - "sync":  [C-a 2] For debugging 
-    3 - "debug": [C-a 3] For running rsync scripts and watching progress (if parallel)
+    2 - "sync":  [C-a 2] For running rsync scripts and watching progress (if parallel)
+    3 - "debug": [C-a 3] For debugging 
+    4 - "GPS":   [C-a 4] For GPS logging
 
  \033[1mTo exit and detach:\033[0m
     C-a d -----> Detatches the screen session. All processes will continue running
@@ -214,6 +215,9 @@ USAGE=$(cat <<-END
  usage: ./echo-help.sh            # for BOTH help messages
         ./echo-help.sh --mccdaq   # for MCC_DAQ help
         ./echo-help.sh --cli      # for cli-spectrogram help
+        ./echo-help.sh --offload  # for rsync help
+        ./echo-help.sh --debug    # for debugging help
+        ./echo-help.sh --gps      # for GPS logging help
         ./echo-help.sh --help/-h  # print this usage message
 END
 )
