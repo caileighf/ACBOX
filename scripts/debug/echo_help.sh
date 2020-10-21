@@ -146,7 +146,7 @@ OFFLOAD_HELP=$(cat <<-END
 END
 )
 
-OFFLOAD_HELP=$(cat <<-END
+GPS_HELP=$(cat <<-END
      \033[1mGPS Logger\033[0m
      ---------------
  
