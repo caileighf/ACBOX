@@ -51,7 +51,15 @@ do
 done
 
 TEMP_LOG=".temp_rsync"
-RSYNC_CMD="rsync -a -r -P -h -v ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN} --remove-source-files"
+RSYNC_CMD="${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST} --log-file ${TEMP_LOG} ${DRY_RUN} --remove-source-files"
+RSYNC_OPTIONS=(
+    --recursive
+    --progress
+    -a
+    -h
+    -v
+)
+
 PAYLOAD=$(cat <<-END
 
 $(date)

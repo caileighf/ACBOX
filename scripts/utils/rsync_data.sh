@@ -61,7 +61,14 @@ PARALLEL=false
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
 HEADER=$(head -n 10 "${DATA_DIR}/SINGLE_log.log")
 TEMP_LOG=".temp_rsync"
-RSYNC_CMD=" -arPhv --log-file ${TEMP_LOG}"
+RSYNC_LOG_OPT="--log-file ${TEMP_LOG}"
+RSYNC_OPTIONS=(
+    --recursive
+    --progress
+    -a
+    -h
+    -v
+)
 
 i=0;
 for ARG in "$@" 
@@ -69,7 +76,7 @@ do
     i=$((i + 1));
 
     if [ ARG = '--dry-run' ]; then
-        RSYNC_CMD="${RSYNC_CMD} --dry-run"
+        RSYNC_OPTIONS+=(--dry-run)
 
     elif [ ARG = '--include-gps' ]; then
         DATA_DIR="${DATA_DIR} ${GPS_DATA_DIR}"
@@ -79,7 +86,7 @@ do
 
     elif [ ARG = '--clean' ]; then
         CLEAN=true
-        RSYNC_CMD="${RSYNC_CMD} --remove-source-files"
+        RSYNC_OPTIONS+=(--remove-source-files)
 
     elif [ ARG = '--parallel' ]; then
         PARALLEL=true
@@ -91,7 +98,7 @@ do
     shift;
 done
 
-RSYNC_CMD="${RSYNC_CMD} ${DATA_DIR} ${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}"
+RSYNC_CMD=("rsync" "${RSYNC_OPTIONS[@]}" "${DATA_DIR}" "${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}")
 PAYLOAD=$(cat <<-END
 
 This data was transferred on:
@@ -106,7 +113,7 @@ REMOTE USER: $REMOTE_USER
        DEST: $REMOTE_DEST
 
 rysnc command run:
-$ $RSYNC_CMD
+$ ${RSYNC_CMD[@]}
 
 END
 )
@@ -122,13 +129,13 @@ fi
 if [ "$PARALLEL" = true ]; then
     DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
     while [ "$DAQ_STATE" = "Running" ]; do
-        rsync "$RSYNC_CMD"
+        rsync "${RSYNC_OPTIONS[@]}" "${DATA_DIR}" "${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}"
         echo -e "\n$(date) --> rsync will start again in $FREQ_SECONDS second(s)\n" | tee "$TEMP_LOG"
         sleep "$SECONDS";
         DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
     done
 else
-    rsync "$RSYNC_CMD"
+    rsync "${RSYNC_OPTIONS[@]}" "${DATA_DIR}" "${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}"
 fi
 
 # ask if they want log header copied
