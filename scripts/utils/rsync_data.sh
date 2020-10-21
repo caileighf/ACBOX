@@ -1,8 +1,7 @@
 #!/bin/bash
 
 function get_yn {
-    PROMPT=$1
-    echo "$PROMPT"
+    echo ${1}
     while true; do
         read -p "Please answer [Yes/No]: " yn
         case $yn in
