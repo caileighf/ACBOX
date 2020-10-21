@@ -3,7 +3,8 @@ screen -t 'DAQ'     0
 screen -t 'cli'     1
 screen -t 'sync'    2
 screen -t 'debug'   3
-screen -t 'welcome' 4
+screen -t 'GPS'     4
+screen -t 'welcome' 5
 
 select 0
 stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less ^M"
@@ -14,6 +15,8 @@ stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --of
 select 3
 stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh | less ^M"
 select 4
+stuff "cd $HOME/ACBOX/gps_logger; $HOME/ACBOX/scripts/debug/echo_help.sh --gps | less ^M"
+select 5
 stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh --screen | less ^M"
 
 zombie xy

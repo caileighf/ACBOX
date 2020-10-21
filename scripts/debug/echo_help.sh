@@ -146,6 +146,20 @@ OFFLOAD_HELP=$(cat <<-END
 END
 )
 
+OFFLOAD_HELP=$(cat <<-END
+     \033[1mGPS Logger\033[0m
+     ---------------
+ 
+     To start the gps logger run:
+        $ start_logging_gps
+
+     This will output data to stdout AND a file.
+     The actual command is:
+        $ gpspipe -t -uu -r | tee $HOME/ACBOX/gps_logger/data/track_$(date +%s).nmea
+ 
+END
+)
+
 HLINE=$(cat <<-END
 \n   ---------------------------------------------------
 END
@@ -233,6 +247,8 @@ else
             MSG="$DEBUG_HELP"
         elif [ "$ARG" = "--offload" ]; then
             MSG="$OFFLOAD_HELP"
+        elif [ "$ARG" = "--gps" ]; then
+            MSG="$GPS_HELP"
         elif [ "$ARG" = "--screen" ]; then 
             printf "\n$WELCOME\n$SCREEN_MSG\n"
             kill -SIGINT $$
