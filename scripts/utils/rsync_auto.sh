@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CONFIG_FILE="$HOME/ACBOX/scripts/utils/rsync_config.json"
+CONFIG_FILE=$(cat "$HOME/ACBOX/scripts/utils/rsync_config.json")
 
 INCLUDE_GPS_DATA=$(echo "$CONFIG_FILE" | jsawk 'return this.INCLUDE_GPS_DATA')
 INCLUDE_GPS_LOGS=$(echo "$CONFIG_FILE" | jsawk 'return this.INCLUDE_GPS_LOGS')
