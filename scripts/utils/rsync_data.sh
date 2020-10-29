@@ -131,7 +131,7 @@ if [ "$CLEAN" = true ]; then
     fi
 fi
 
-RESP=$(get_yn 'Start transfer?')
+RESP=$(get_yn 'Start\ transfer?')
 if [ "$RESP" = false ]; then
     kill -SIGINT $$
 fi
