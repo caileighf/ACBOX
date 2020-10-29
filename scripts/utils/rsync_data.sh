@@ -74,7 +74,7 @@ RSYNC_OPTIONS=(
     -v
 )
 
-echo "$@"
+echo "ARGS: $@"
 
 i=0;
 for ARG in "$@" 
@@ -126,14 +126,18 @@ END
 echo -e "$HEADER\n$PAYLOAD\n" | tee "$TEMP_LOG"
 
 if [ "$CLEAN" = true ]; then
+    echo "----------------------------------------------------------------"
     echo "${bold}Are you sure you want to delete the source files after transfer?${normal}"
+    echo "----------------------------------------------------------------"
     RESP=$(get_yn)
     if [ "$RESP" = false ]; then
         kill -SIGINT $$
     fi
 fi
 
+echo "---------------"
 echo "${bold}Start transfer?${normal}"
+echo "---------------"
 RESP=$(get_yn)
 if [ "$RESP" = false ]; then
     kill -SIGINT $$
@@ -152,8 +156,9 @@ else
 fi
 
 # ask if they want log header copied
-echo ""
+echo -e "\n----------------------------------------------------------------------------------"
 echo "${bold}Would you like the log file or \"receipt\" for this transaction transferred as well?${normal}"
+echo "----------------------------------------------------------------------------------"
 RESP=$(get_yn)
 if [ "$RESP" = true ]; then
     rsync -arPhv "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST/rsync_transaction_receipt.txt" --remove-source-files;
