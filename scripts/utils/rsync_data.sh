@@ -1,6 +1,6 @@
 #!/bin/bash
 function get_yn() {
-    echo $1
+    # echo "$1"
     while true; do
         read -p "Please answer [Yes/No]: " yn
         case $yn in
@@ -124,13 +124,13 @@ END
 echo -e "$HEADER\n$PAYLOAD\n" | tee "$TEMP_LOG"
 
 if [ "$CLEAN" = true ]; then
-    RESP=$(get_yn $(echo "Are you sure you want to delete the source files after transfer?"))
+    RESP=$(echo "Are you sure you want to delete the source files after transfer?"; get_yn)
     if [ "$RESP" = false ]; then
         kill -SIGINT $$
     fi
 fi
 
-RESP=$(get_yn $(echo "Start transfer?"))
+RESP=$(echo "Start transfer?"; get_yn)
 if [ "$RESP" = false ]; then
     kill -SIGINT $$
 fi
@@ -148,7 +148,7 @@ else
 fi
 
 # ask if they want log header copied
-RESP=$(get_yn $(echo "Would you like the log file or \"receipt\" for this transaction transferred as well?"))
+RESP=$(echo "Would you like the log file or \"receipt\" for this transaction transferred as well?"; get_yn)
 if [ "$RESP" = true ]; then
     rsync -arPhv "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --remove-source-files;
 fi
