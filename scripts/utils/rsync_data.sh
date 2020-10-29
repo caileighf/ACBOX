@@ -143,8 +143,8 @@ if [ "$RESP" = false ]; then
     kill -SIGINT $$
 fi
 
-if [ "$PARALLEL" = true ]; then
-    DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
+DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
+if [[ "$PARALLEL" = true && "$DAQ_STATE" = "Running" ]]; then
     while [ "$DAQ_STATE" = "Running" ]; do
         rsync "${RSYNC_OPTIONS[@]}" "${DATA_DIR}" "${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}"
         echo -e "\n$(date) --> rsync will start again in $FREQ_SECONDS second(s)\n" | tee "$TEMP_LOG"
