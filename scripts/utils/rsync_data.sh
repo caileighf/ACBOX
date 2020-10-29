@@ -79,23 +79,23 @@ for ARG in "$@"
 do
     i=$((i + 1));
 
-    if [ ARG = '--dry-run' ]; then
+    if [ ${ARG} = '--dry-run' ]; then
         RSYNC_OPTIONS+=(--dry-run)
 
-    elif [ ARG = '--include-gps' ]; then
+    elif [ ${ARG} = '--include-gps' ]; then
         SOURCE_DIRS+=("--include=${GPS_DATA_DIR}")
 
-    elif [ ARG = '--include-gps-logs' ]; then
+    elif [ ${ARG} = '--include-gps-logs' ]; then
         SOURCE_DIRS+=("--include=${GPS_LOG_DIR}")
 
-    elif [ ARG = '--clean' ]; then
+    elif [ ${ARG} = '--clean' ]; then
         CLEAN=true
         RSYNC_OPTIONS+=(--remove-source-files)
 
-    elif [ ARG = '--parallel' ]; then
+    elif [ ${ARG} = '--parallel' ]; then
         PARALLEL=true
 
-    elif [ ARG = '--help' ]; then
+    elif [ ${ARG} = '--help' ]; then
         echo -e "\n$USAGE\n"
         kill -SIGINT $$
     fi
