@@ -154,6 +154,7 @@ alias rsync_parallel='rsync_data.sh --parallel'
 alias rsync_clean='rsync_data.sh --clean'
 alias rsync_all='rsync_data.sh'
 alias rsync_auto='rsync_auto.sh'
+alias config_rsync='pushd $HOME/ACBOX/scripts/utils/ > /dev/null; $PYTHON_EXE config_rsync.py; popd > /dev/null'
 
 alias has_fix="gpspipe -n 4 -w | grep 'TPV' | grep -oE 'mode\":0,|mode\":1,' > /dev/null && echo 'GPS HAS NO FIX' || echo 'GPS HAS FIX'"
 alias has_pps="gpspipe -n 3 -w | grep 'WATCH' | grep -oE 'pps\":true' > /dev/null && echo 'HAS PPS' || echo 'NO PPS'"

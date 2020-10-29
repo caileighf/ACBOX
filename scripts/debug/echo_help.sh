@@ -147,14 +147,9 @@ OFFLOAD_HELP=$(cat <<-END
         ------------------- SSH keys should be setup for the auto rsync mode ------------------
         ----------------------- In this mode NO user input is required ------------------------
         ---------------------------------------------------------------------------------------
+        $ config_rsync   # configure rsync remote client info for rsync_auto
         $ rsync_auto     # this alias calls a script called rsync_auto.sh that has the remote
-                         # info saved. If you setup the rsync_auto.sh file with your:
-                         #  REMOTE_USER: this is the user for the remote machine not the ACBOX!
-                         #  REMOTE_IP:   if using a local connection HOSTNAME.local works too
-                         #  REMOTE_DEST: location on remote machine to copy files to. Make sure
-                         #               the remote user has the permissions needed in the ..
-                         #               .. remote dest
-                         # You can also set flags to include gps data and logs
+                         # info saved in rsync_config.json
  
 END
 )

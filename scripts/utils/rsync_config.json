@@ -1,9 +1,9 @@
 {
-    "REMOTE_USER": "caileigh",
-    "REMOTE_IP": "caileigh-XPS-13-9370.local",
-    "REMOTE_DEST": "/home/caileigh/ACBOX_data",
+    "CLEAN": false,
     "INCLUDE_GPS_DATA": true,
     "INCLUDE_GPS_LOGS": true,
-    "CLEAN": false,
-    "PARALLEL": false
+    "PARALLEL": false,
+    "REMOTE_DEST": "/home/caileigh/ACBOX_data",
+    "REMOTE_IP": "caileigh-XPS-13-9370.local",
+    "REMOTE_USER": "caileigh"
 }
