@@ -150,6 +150,11 @@ alias kill_daq='$HOME/ACBOX/scripts/utils/kill_daq.sh'
 alias daq_state='$HOME/ACBOX/scripts/status/get_daq_state.sh'
 alias start_logging_gps='gpspipe -t -uu -r | tee $HOME/ACBOX/gps_logger/data/track_$(date +%s).nmea'
 
+alias rsync_parallel='rsync_data.sh --parallel'
+alias rsync_clean='rsync_data.sh --clean'
+alias rsync_all='rsync_data.sh'
+alias rsync_auto='rsync_auto.sh'
+
 alias has_fix="gpspipe -n 4 -w | grep 'TPV' | grep -oE 'mode\":0,|mode\":1,' > /dev/null && echo 'GPS HAS NO FIX' || echo 'GPS HAS FIX'"
 alias has_pps="gpspipe -n 3 -w | grep 'WATCH' | grep -oE 'pps\":true' > /dev/null && echo 'HAS PPS' || echo 'NO PPS'"
 alias see_daq="lsusb | grep 'Measurement Computing Corp' > /dev/null && echo 'DAQ Connected' || echo 'DAQ Not Found'"

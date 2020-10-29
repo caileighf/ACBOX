@@ -1,20 +1,16 @@
 #!/bin/bash
 
-#
-#   SET THE FOLLOWING VARS TO CONFIGURE AUTO TRANSFER
-#
-INCLUDE_GPS_DATA=true
-INCLUDE_GPS_LOGS=true
-CLEAN=false
-PARALLEL=false
+CONFIG_FILE="$HOME/ACBOX/scripts/utils/rsync_config.json"
 
-REMOTE_USER="caileigh"
-REMOTE_IP="caileigh-XPS-13-9370.local"
-REMOTE_DEST="/home/caileigh/ACBOX_data"
+INCLUDE_GPS_DATA=$(echo "$CONFIG_FILE" | jsawk 'return this.INCLUDE_GPS_DATA')
+INCLUDE_GPS_LOGS=$(echo "$CONFIG_FILE" | jsawk 'return this.INCLUDE_GPS_LOGS')
+CLEAN=$(echo "$CONFIG_FILE" | jsawk 'return this.CLEAN')
+PARALLEL=$(echo "$CONFIG_FILE" | jsawk 'return this.PARALLEL')
 
-#
-#   DON'T CHANGE THE LINES UNDER THIS MESSAGE!
-#
+REMOTE_USER=$(echo "$CONFIG_FILE" | jsawk 'return this.REMOTE_USER')
+REMOTE_IP=$(echo "$CONFIG_FILE" | jsawk 'return this.REMOTE_IP')
+REMOTE_DEST=$(echo "$CONFIG_FILE" | jsawk 'return this.REMOTE_DEST')
+
 AUTO_OPTS=()
 
 # handle user set flags
