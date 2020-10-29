@@ -42,7 +42,7 @@ do
         d) REMOTE_DEST=${OPTARG};;
         f) CONFIG_FILE=$(cat ${OPTARG});;
         s) SECONDS=${OPTARG};;
-        -- ) shift; break;; # this allows long args to pass to next section
+        -- ) break;; # this allows long args to pass to next section
         \? ) echo "Unknown option: -$OPTARG" >&2; ;;
         :  ) echo "Missing option argument for -$OPTARG" >&2; ;;
         *  ) echo "Unimplemented option: -$OPTARG" >&2; ;;
