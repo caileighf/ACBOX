@@ -119,13 +119,18 @@ $ ${RSYNC_CMD[@]}
 
 END
 )
-echo -e "$HEADER\n$PAYLOAD\n" > "$TEMP_LOG"
+echo -e "$HEADER\n$PAYLOAD\n" | tee "$TEMP_LOG"
 
 if [ "$CLEAN" = true ]; then
     RESP=$(get_yn "Are you sure you want to delete the source files after transfer?")
     if [ "$RESP" = false ]; then
         kill -SIGINT $$
     fi
+fi
+
+RESP=$(get_yn "Start transfer?")
+if [ "$RESP" = false ]; then
+    kill -SIGINT $$
 fi
 
 if [ "$PARALLEL" = true ]; then
