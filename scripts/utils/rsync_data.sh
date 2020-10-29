@@ -125,13 +125,13 @@ END
 echo -e "$HEADER\n$PAYLOAD\n" | tee "$TEMP_LOG"
 
 if [ "$CLEAN" = true ]; then
-    RESP=$(get_yn "Are you sure you want to delete the source files after transfer?")
+    RESP=$(get_yn 'Are you sure you want to delete the source files after transfer?')
     if [ "$RESP" = false ]; then
         kill -SIGINT $$
     fi
 fi
 
-RESP=$(get_yn "Start transfer?")
+RESP=$(get_yn 'Start transfer?')
 if [ "$RESP" = false ]; then
     kill -SIGINT $$
 fi
@@ -149,7 +149,7 @@ else
 fi
 
 # ask if they want log header copied
-RESP=$(get_yn "Would you like the log file or \"receipt\" for this transaction transferred as well?")
+RESP=$(get_yn 'Would you like the log file or \"receipt\" for this transaction transferred as well?')
 if [ "$RESP" = true ]; then
     rsync -arPhv "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --remove-source-files;
 fi
