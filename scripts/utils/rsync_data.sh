@@ -47,8 +47,6 @@ do
         :  ) echo "Missing option argument for -$OPTARG" >&2; ;;
         *  ) echo "Unimplemented option: -$OPTARG" >&2; ;;
     esac
-    # removes handled options
-    shift $((OPTIND -1))
 done
 
 if ((OPTIND == 1)); then
