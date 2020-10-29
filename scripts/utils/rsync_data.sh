@@ -32,9 +32,9 @@ USAGE=$(cat <<-END
         -f <CONFIG.JSON-FILE> --> Pass config file if different than $HOME/ACBOX/MCC_DAQ/config.json
 
 * enviroment variables this script uses
- '\$GPS_DATA_DIR' ---------------> Directory containing GPS data files (track_<EPOCH>.nmea)
- '\$GPS_LOG_DIR' ----------------> Directory containing GPS log files (debug_<EPOCH>.log)
- '\$DAQ_CONFIG' -----------------> Path to MCC_DAQ driver config.json (required if using default config)
+ \$GPS_DATA_DIR ----------------> Directory containing GPS data files (track_<EPOCH>.nmea)
+ \$GPS_LOG_DIR -----------------> Directory containing GPS log files (debug_<EPOCH>.log)
+ \$DAQ_CONFIG ------------------> Path to MCC_DAQ driver config.json (required if using default config)
 
 END
 )
