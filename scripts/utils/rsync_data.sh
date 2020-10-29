@@ -1,6 +1,6 @@
 #!/bin/bash
 function get_yn {
-    echo ${1}
+    echo "${1}"
     while true; do
         read -p "Please answer [Yes/No]: " yn
         case $yn in
@@ -34,7 +34,7 @@ END
 CONFIG_FILE=$(cat $HOME/ACBOX/MCC_DAQ/config.json)
 SECONDS=5
 
-while getopts u:i:d:f:s: flag
+while getopts u:i:d:f:s:-: flag
 do
     case "${flag}" in
         u) REMOTE_USER=${OPTARG};;
@@ -42,7 +42,7 @@ do
         d) REMOTE_DEST=${OPTARG};;
         f) CONFIG_FILE=$(cat ${OPTARG});;
         s) SECONDS=${OPTARG};;
-        -- ) break;; # this allows long args to pass to next section
+        -) break;; # this allows long args to pass to next section
         \? ) echo "Unknown option: -$OPTARG" >&2; ;;
         :  ) echo "Missing option argument for -$OPTARG" >&2; ;;
         *  ) echo "Unimplemented option: -$OPTARG" >&2; ;;
@@ -58,6 +58,9 @@ fi
 CLEAN=false
 PARALLEL=false
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
+SOURCE_DIRS=(
+    "--include=${DATA_DIR}"
+)
 HEADER=$(head -n 10 "${DATA_DIR}/SINGLE_log.log")
 TEMP_LOG=".temp_rsync"
 RSYNC_LOG_OPT="--log-file ${TEMP_LOG}"
@@ -78,10 +81,10 @@ do
         RSYNC_OPTIONS+=(--dry-run)
 
     elif [ ARG = '--include-gps' ]; then
-        DATA_DIR="${DATA_DIR} ${GPS_DATA_DIR}"
+        SOURCE_DIRS+=("--include=${GPS_DATA_DIR}")
 
     elif [ ARG = '--include-gps-logs' ]; then
-        DATA_DIR="${DATA_DIR} ${GPS_LOG_DIR}"
+        SOURCE_DIRS+=("--include=${GPS_LOG_DIR}")
 
     elif [ ARG = '--clean' ]; then
         CLEAN=true
@@ -97,7 +100,7 @@ do
     shift;
 done
 
-RSYNC_CMD=("rsync" "${RSYNC_OPTIONS[@]}" "${DATA_DIR}" "${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}")
+RSYNC_CMD=("rsync" "${RSYNC_OPTIONS[@]}" "${SOURCE_DIRS[@]}" "${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}")
 PAYLOAD=$(cat <<-END
 
 This data was transferred on:
@@ -105,7 +108,7 @@ This data was transferred on:
 
 ACBOX USER: $USER
 ACBOX HOST: $HOSTNAME
-    SOURCE: $DATA_DIR
+    SOURCE: ${SOURCE_DIRS[@]}
 
 REMOTE USER: $REMOTE_USER
   REMOTE IP: $REMOTE_IP
