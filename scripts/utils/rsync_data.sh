@@ -72,6 +72,8 @@ RSYNC_OPTIONS=(
     -v
 )
 
+echo "$@"
+
 i=0;
 for ARG in "$@" 
 do
