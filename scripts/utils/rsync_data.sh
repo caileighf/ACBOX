@@ -152,8 +152,9 @@ else
 fi
 
 # ask if they want log header copied
+echo ""
 echo "${bold}Would you like the log file or \"receipt\" for this transaction transferred as well?${normal}"
 RESP=$(get_yn)
 if [ "$RESP" = true ]; then
-    rsync -arPhv "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST" --remove-source-files;
+    rsync -arPhv "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST/rsync_transaction_receipt.txt" --remove-source-files;
 fi
