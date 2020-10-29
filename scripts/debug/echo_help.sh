@@ -199,9 +199,7 @@ $(cat $HOME/ACBOX/scripts/banner.txt)
     
  \033[1mOffloading Data:\033[0m
     $ screen -R ACBOX      # attach to screen session setup for ACBOX
-    $ rsync_all -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST>
-    --
-    $ rsync_parallel -u <REMOTE-USER> -i <REMOTE-IP-ADDRESS> -d <REMOTE-DEST> -s <FREQ-SEC>
+    $ rsync_auto           # configure by running $ config_rsync
 
  \033[1mACBOX screen session:\033[0m
     The ACBOX screen session has the following four windows:
