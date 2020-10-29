@@ -1,6 +1,6 @@
 #!/bin/bash
 function get_yn {
-    echo "${1}"
+    echo "$1"
     while true; do
         read -p "Please answer [Yes/No]: " yn
         case $yn in
