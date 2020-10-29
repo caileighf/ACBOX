@@ -3,16 +3,21 @@
 # For styling prompt to stick out
 bold=$(tput bold)
 normal=$(tput sgr0)
+AUTO=false
 
 function get_yn() {
-    while true; do
-        read -p "Please answer [Yes/No]: " yn
-        case $yn in
-            [Yy]* ) local return_val=true; break;;
-            [Nn]* ) local return_val=false; break;;
-            * ) echo "${bold}Please answer yes or no.${normal}";;
-        esac
-    done
+    if [ "$AUTO" = false ]; then
+        while true; do
+            read -p "Please answer [Yes/No]: " yn
+            case $yn in
+                [Yy]* ) local return_val=true; break;;
+                [Nn]* ) local return_val=false; break;;
+                * ) echo "${bold}Please answer yes or no.${normal}";;
+            esac
+        done
+    else
+        local return_val=true;
+    fi
     echo $return_val
 }
 
@@ -44,9 +49,10 @@ SECONDS=5
 #
 #   HANDLE REQUIRED AND OPTIONAL SHORT ARGS
 #
-while getopts u:i:d:f:s:-: flag
+while getopts u:i:d:f:s:-:a flag
 do
     case "${flag}" in
+        a) AUTO=true;;
         u) REMOTE_USER=${OPTARG};;
         i) REMOTE_IP=${OPTARG};;
         d) REMOTE_DEST=${OPTARG};;

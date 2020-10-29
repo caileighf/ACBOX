@@ -37,4 +37,5 @@ fi
 rsync_data.sh -u "$REMOTE_USER" \
               -i "$REMOTE_IP"   \
               -d "$REMOTE_DEST" \
+              -a # auto does not ask for user input
               "${AUTO_OPTS[@]}"
