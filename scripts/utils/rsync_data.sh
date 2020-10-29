@@ -88,6 +88,7 @@ RSYNC_OPTIONS=(
     -h
     -v
 )
+
 echo "ARGS: $@"
 i=0;
 for ARG in "$@" 

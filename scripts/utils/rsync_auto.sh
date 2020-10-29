@@ -1,20 +1,25 @@
 #!/bin/bash
 
 #
-#   For easier rsync data transfers with saved user credentials and preferences
+#   SET THE FOLLOWING VARS TO CONFIGURE AUTO TRANSFER
 #
-REMOTE_USER="caileigh"
-REMOTE_IP="caileigh-XPS-13-9370.local"
-REMOTE_DEST="/home/caileigh/ACBOX_data"
 INCLUDE_GPS_DATA=true
 INCLUDE_GPS_LOGS=true
 CLEAN=false
 PARALLEL=false
 
+REMOTE_USER="caileigh"
+REMOTE_IP="caileigh-XPS-13-9370.local"
+REMOTE_DEST="/home/caileigh/ACBOX_data"
+
+#
+#   DON'T CHANGE THE LINES UNDER THIS MESSAGE!
+#
 AUTO_OPTS=(
     --all
     )
 
+# handle user set flags
 if [ "$INCLUDE_GPS_DATA" = true ]; then
     AUTO_OPTS+=(--include-gps)
 fi
