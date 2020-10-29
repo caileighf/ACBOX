@@ -1,4 +1,6 @@
 #!/bin/bash
+
+# For styling prompt to stick out
 bold=$(tput bold)
 normal=$(tput sgr0)
 
@@ -8,7 +10,7 @@ function get_yn() {
         case $yn in
             [Yy]* ) local return_val=true; break;;
             [Nn]* ) local return_val=false; break;;
-            * ) echo "Please answer yes or no.";;
+            * ) echo "${bold}Please answer yes or no.${normal}";;
         esac
     done
     echo $return_val
@@ -29,13 +31,19 @@ USAGE=$(cat <<-END
         --include-gps-logs -----> Include gps debugging logs
         -f <CONFIG.JSON-FILE> --> Pass config file if different than $HOME/ACBOX/MCC_DAQ/config.json
 
+* enviroment variables this script uses
+ '$GPS_DATA_DIR' ---------------> Directory containing GPS data files (track_<EPOCH>.nmea)
+ '$GPS_LOG_DIR' ----------------> Directory containing GPS log files (debug_<EPOCH>.log)
+ '$DAQ_CONFIG' -----------------> Path to MCC_DAQ driver config.json (default config)
+
 END
 )
 
-# will get over written if user passed different config
-CONFIG_FILE=$(cat $HOME/ACBOX/MCC_DAQ/config.json)
+CONFIG_FILE=$(cat ${DAQ_CONFIG})
 SECONDS=5
-
+#
+#   HANDLE REQUIRED AND OPTIONAL SHORT ARGS
+#
 while getopts u:i:d:f:s:-: flag
 do
     case "${flag}" in
@@ -51,12 +59,19 @@ do
     esac
 done
 
+#
+#   HANDLE NO ARGS
+#
 if ((OPTIND == 1)); then
     echo "No options specified";
     echo "$USAGE";
     kill -SIGINT $$
 fi
 
+#
+#   HANDLE LONG ARGS --  Handle long args and add options to rsync command
+#
+DRY_RUN=false
 CLEAN=false
 PARALLEL=false
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
@@ -73,15 +88,14 @@ RSYNC_OPTIONS=(
     -h
     -v
 )
-
 echo "ARGS: $@"
-
 i=0;
 for ARG in "$@" 
 do
     i=$((i + 1));
 
     if [ ${ARG} = '--dry-run' ]; then
+        DRY_RUN=true
         RSYNC_OPTIONS+=(--dry-run)
 
     elif [ ${ARG} = '--include-gps' ]; then
@@ -123,6 +137,10 @@ $ ${RSYNC_CMD[@]}
 
 END
 )
+
+#
+#   SHOW USER -- info about upcoming transfer
+#
 echo -e "$HEADER\n$PAYLOAD\n" | tee "$TEMP_LOG"
 
 if [ "$CLEAN" = true ]; then
@@ -135,14 +153,25 @@ if [ "$CLEAN" = true ]; then
     fi
 fi
 
-echo "---------------"
-echo "${bold}Start transfer?${normal}"
-echo "---------------"
-RESP=$(get_yn)
-if [ "$RESP" = false ]; then
-    kill -SIGINT $$
+#
+#   PROMPT USER -- Give user chance to look over header & payload before starting transfer
+#
+if [ "$DRY_RUN" = false ]; then
+    echo "---------------"
+    echo "${bold}Start transfer?${normal}"
+    echo "---------------"
+    RESP=$(get_yn)
+    if [ "$RESP" = false ]; then
+        kill -SIGINT $$
+    fi
 fi
 
+#
+#   TRANSFER DATA -- if PARALLEL, transfer in loop until DAQ stops running
+#                 -- if default (--all), transfer in one go
+#
+#   * if user passes --parallel and the DAQ isn't running, we default to --all mode
+#
 DAQ_STATE=$($HOME/ACBOX/scripts/status/get_daq_state.sh)
 if [[ "$PARALLEL" = true && "$DAQ_STATE" = "Running" ]]; then
     while [ "$DAQ_STATE" = "Running" ]; do
@@ -155,11 +184,18 @@ else
     rsync "${RSYNC_OPTIONS[@]}" "${DATA_DIR}" "${REMOTE_USER}@${REMOTE_IP}:${REMOTE_DEST}"
 fi
 
-# ask if they want log header copied
-echo -e "\n----------------------------------------------------------------------------------"
-echo "${bold}Would you like the log file or \"receipt\" for this transaction transferred as well?${normal}"
-echo "----------------------------------------------------------------------------------"
-RESP=$(get_yn)
-if [ "$RESP" = true ]; then
-    rsync -arPhv "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST/rsync_transaction_receipt.txt" --remove-source-files;
+#
+#   CLEAN UP -- transfer rsync log file/receipt if not dry run
+#
+if [ "$DRY_RUN" = true ]; then
+    echo -e "\nDone!\n"
+else
+    # ask if they want log header copied
+    echo -e "\n----------------------------------------------------------------------------------"
+    echo "${bold}Would you like the log file or \"receipt\" for this transaction transferred as well?${normal}"
+    echo "----------------------------------------------------------------------------------"
+    RESP=$(get_yn)
+    if [ "$RESP" = true ]; then
+        rsync -arPhv "$TEMP_LOG" "$REMOTE_USER@$REMOTE_IP:$REMOTE_DEST/rsync_transaction_receipt.txt" --remove-source-files;
+    fi
 fi

@@ -33,7 +33,7 @@ fi
 
 DRY_RUN=false
 DATA_DIR=$( echo "$CONFIG_FILE"  | jsawk 'return this.data_directory' )
-HEADER=$(head -n 10 "${DATA_DIR}SINGLE_log.log")
+HEADER=$(head -n 10 "${DATA_DIR}/SINGLE_log.log")
 i=0;
 for ARG in "$@" 
 do

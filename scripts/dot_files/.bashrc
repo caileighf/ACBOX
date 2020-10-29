@@ -123,6 +123,8 @@ export PROMPT_COMMAND='RETRN_VAL=$?;echo "$(whoami) $(date) [$$]: $(history 1 | 
 export GPS_DATA_DIR=~/ACBOX/gps_logger/data
 export GPS_LOG_DIR=~/ACBOX/gps_logger/logs
 
+export DAQ_CONFIG=$HOME/ACBOX/MCC_DAQ/config.json
+
 alias python=$HOME/venv/bin/python
 
 alias cddaq='cd $HOME/ACBOX/MCC_DAQ'
