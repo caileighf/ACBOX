@@ -15,9 +15,7 @@ REMOTE_DEST="/home/caileigh/ACBOX_data"
 #
 #   DON'T CHANGE THE LINES UNDER THIS MESSAGE!
 #
-AUTO_OPTS=(
-    --all
-    )
+AUTO_OPTS=()
 
 # handle user set flags
 if [ "$INCLUDE_GPS_DATA" = true ]; then
