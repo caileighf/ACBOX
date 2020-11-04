@@ -1,6 +1,9 @@
 ## Setting Up The Raspberry Pi For Acoustic Data Logging
 Sections in this README are in order -- make sure you're running the setup scripts in the following order:<br>
 _All scripts must complete successfully before moving on to the next step!_
+_TIP: To avoid the need to babysit the setup scripts, pipe yes to the script e.g., `yes | ./install-dependencies.sh`_
+
+First navigate to the scripts directory `cd /path/to/ACBOX/scripts`.
 
 1. `install-dependencies.sh`
 2. `init-uldaq.sh`
