@@ -19,7 +19,7 @@ stuff "cd $HOME/ACBOX/gps_logger; $HOME/ACBOX/scripts/debug/echo_help.sh --gps |
 select 5
 stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh --screen | less ^M"
 
-zombie xy
+# zombie xy
 # Change Escape Combination to Ctrl+f (Ctrl+a is too useful to lose)
 #escape ^Ff
 
@@ -31,7 +31,7 @@ vbell off
 
 # Set scrollback buffer to 10000
 defscrollback 10000
-nonblock on
+# nonblock on
 #
 # look and feel for the bottom two lines.
 #
@@ -49,44 +49,43 @@ backtick 4 60 5 $HOME/ACBOX/scripts/status/get_free_mem.sh
 # show volume (C-a s)
 backtick 5 60 5 $HOME/ACBOX/scripts/status/get_volume.sh Headphone
 # show daq state (C-a D) every 10 seconds
-backtick 6 60 5 $HOME/ACBOX/scripts/status/get_daq_state.sh
+backtick 6 10 5 $HOME/ACBOX/scripts/status/get_daq_state.sh
 
 # echo minimal location (lat/lon) with google map link
 # backtick 3 30 30 $HOME/ACBOX/scripts/status/get_loc.sh
 
 hardstatus alwayslastline
-hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
+# hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
+
 # mouse tracking allows to switch region focus by clicking
-#mousetrack on
+# mousetrack on
 
 # navigating regions with Ctrl-arrows
-bindkey "^[[1;5D" focus left
-bindkey "^[[1;5C" focus right
-bindkey "^[[1;5A" focus up
-bindkey "^[[1;5B" focus down
+# bindkey "^[[1;5D" focus left
+# bindkey "^[[1;5C" focus right
+# bindkey "^[[1;5A" focus up
+# bindkey "^[[1;5B" focus down
 
 #
 #  Toggle 'fullscreen' or not.
 #
-bind f eval "caption splitonly" "hardstatus ignore"
-bind F eval "caption always"    "hardstatus alwayslastline"
-bind t eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %3`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind m eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| free space: %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| volume: %5`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind l eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| cpu load: %l%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-bind D eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
-
-bind 
+# bind f eval "caption splitonly" "hardstatus ignore"
+# bind F eval "caption always"    "hardstatus alwayslastline"
+# bind t eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| %3`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+# bind m eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| free space: %4`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+# bind s eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| volume: %5`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+# bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up since: %2`%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+# bind l eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| cpu load: %l%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
+# bind D eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 
 # F2 puts Screen into resize mode. Resize regions using hjkl keys.
-bindkey "^[OQ" eval "command -c rsz" # enter resize mode
+# bindkey "^[OQ" eval "command -c rsz" # enter resize mode
 
 # use hjkl keys to resize regions
-bind -c rsz h eval "resize -h -5" "command -c rsz"
-bind -c rsz j eval "resize -v -5" "command -c rsz"
-bind -c rsz k eval "resize -v +5" "command -c rsz"
-bind -c rsz l eval "resize -h +5" "command -c rsz"
+# bind -c rsz h eval "resize -h -5" "command -c rsz"
+# bind -c rsz j eval "resize -v -5" "command -c rsz"
+# bind -c rsz k eval "resize -v +5" "command -c rsz"
+# bind -c rsz l eval "resize -h +5" "command -c rsz"
 
 # This line makes Detach and Re-attach without losing the regions/windows layout
 layout save default
