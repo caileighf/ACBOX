@@ -17,7 +17,7 @@
 #   printf "My IP address is %s\n" "$_IP"
 # fi
 
-screen -dmS gps_logger bash -c "/home/pi/ACBOX/scripts/start_gps_logger.sh";
-screen -dmS daq_logger bash -c "/home/pi/ACBOX/scripts/start_daq_logger.sh";
+runuser -l pi -c 'screen -dmS GPS bash /home/pi/ACBOX/scripts/start_gps_logger.sh'
+runuser -l pi -c 'screen -dmS DAQ bash /home/pi/ACBOX/scripts/start_daq_logger.sh'
 
 exit 0
