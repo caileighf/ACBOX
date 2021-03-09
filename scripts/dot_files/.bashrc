@@ -159,6 +159,7 @@ alias config_rsync='pushd $HOME/ACBOX/scripts/utils/ > /dev/null; $PYTHON_EXE co
 alias has_fix="gpspipe -n 4 -w | grep 'TPV' | grep -oE 'mode\":0,|mode\":1,' > /dev/null && echo 'GPS HAS NO FIX' || echo 'GPS HAS FIX'"
 alias has_pps="gpspipe -n 3 -w | grep 'WATCH' | grep -oE 'pps\":true' > /dev/null && echo 'HAS PPS' || echo 'NO PPS'"
 alias see_daq="lsusb | grep 'Measurement Computing Corp' > /dev/null && echo 'DAQ Connected' || echo 'DAQ Not Found'"
+alias clock_stat="chronyc sources -v"
 
 # Commands that run at the start of every session
-on_ssh
+# on_ssh

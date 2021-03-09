@@ -17,9 +17,16 @@
 #   printf "My IP address is %s\n" "$_IP"
 # fi
 
+<<<<<<< HEAD
 runuser -l pi -c 'screen -dmS ACBOX -c /home/pi/ACBOX/scripts/dot_files/.screenrc'
 #runuser -l pi -c 'screen -dmS GPS bash /home/pi/ACBOX/scripts/start_gps_logger.sh'
 #runuser -l pi -c 'screen -dmS DAQ bash /home/pi/ACBOX/scripts/start_daq_logger.sh'
 #runuser -l pi -c 'screen -dmS IMU bash /home/pi/ACBOX/scripts/start_imu_logger.sh'
 
 exit 0
+=======
+runuser -l pi -c 'screen -dmS GPS bash /home/pi/ACBOX/scripts/start_gps_logger.sh'
+runuser -l pi -c 'screen -dmS DAQ bash /home/pi/ACBOX/scripts/start_daq_logger.sh'
+
+exit 0
+>>>>>>> 96ef417842d0b2dc37ee202c922a7bafd1b813ce
