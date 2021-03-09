@@ -26,7 +26,7 @@ stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh --screen | less ^
 
 # zombie xy
 # Change Escape Combination to Ctrl+f (Ctrl+a is too useful to lose)
-#escape ^Ff
+escape ^Ff
 
 # Turn off the welcome message
 startup_message off
@@ -60,7 +60,7 @@ backtick 6 10 5 $HOME/ACBOX/scripts/status/get_daq_state.sh
 # backtick 3 30 30 $HOME/ACBOX/scripts/status/get_loc.sh
 
 hardstatus alwayslastline
-# hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
+hardstatus string "%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]"
 
 # mouse tracking allows to switch region focus by clicking
 # mousetrack on
