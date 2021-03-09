@@ -4,10 +4,12 @@ screen -t 'cli'     1
 screen -t 'sync'    2
 screen -t 'debug'   3
 screen -t 'GPS'     4
+screen -t 'status'  6
 screen -t 'welcome' 5
 
 select 0
-stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less ^M"
+#stuff "cd $HOME/ACBOX/MCC_DAQ; $HOME/ACBOX/scripts/debug/echo_help.sh --mccdaq | less ^M"
+stuff "cd $HOME/ACBOX/MCC_DAQ; start_collect ^M"
 select 1
 stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --cli | less ^M"
 select 2
@@ -15,7 +17,10 @@ stuff "cd $HOME/ACBOX/MCC_DAQ/data/; $HOME/ACBOX/scripts/debug/echo_help.sh --of
 select 3
 stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh | less ^M"
 select 4
-stuff "cd $HOME/ACBOX/gps_logger; $HOME/ACBOX/scripts/debug/echo_help.sh --gps | less ^M"
+stuff "cd $HOME/ACBOX/gps_logger; start_logging_gps ^M"
+#stuff "cd $HOME/ACBOX/gps_logger; $HOME/ACBOX/scripts/debug/echo_help.sh --gps | less ^M"
+select 6
+stuff "cd $HOME/ACBOX/logs; sudo ./run_state.sh | tee blue_led_state_`date +'%s'`.log ^M"
 select 5
 stuff "cd $HOME/ACBOX/; $HOME/ACBOX/scripts/debug/echo_help.sh --screen | less ^M"
 
@@ -77,7 +82,7 @@ bind u eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| up s
 bind l eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| cpu load: %l%{g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 bind D eval "hardstatus string \"%{= kG}[%{Y}${USER}%{B}@%{G}%H%{g}%? %{B}| DAQ state: %{+b  Y}%6`%{-b  g}][%=%{+b  Y}%1`%{-b g}%=][system time: %{B}%m/%d/%y %{W}%c:%s%{g}]\""
 
-bind 
+#bind 
 
 # F2 puts Screen into resize mode. Resize regions using hjkl keys.
 bindkey "^[OQ" eval "command -c rsz" # enter resize mode
