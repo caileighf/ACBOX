@@ -34,12 +34,14 @@ USAGE=$(cat <<-END
         --dry-run --------------> Run as dry run with no actual changes
         --include-gps ----------> Include gps data in transfer
         --include-gps-logs -----> Include gps debugging logs
+        --include-all-logs -----> Include gps, and other general logs
         -f <CONFIG.JSON-FILE> --> Pass config file if different than $HOME/ACBOX/MCC_DAQ/config.json
 
 * enviroment variables this script uses
  \$GPS_DATA_DIR ----------------> Directory containing GPS data files (track_<EPOCH>.nmea)
  \$GPS_LOG_DIR -----------------> Directory containing GPS log files (debug_<EPOCH>.log)
  \$DAQ_CONFIG ------------------> Path to MCC_DAQ driver config.json (required if using default config)
+ \$LOG_DIR ---------------------> Directory containing general log files (<desc>_<EPOCH>.log)
 
 END
 )
@@ -110,6 +112,10 @@ do
 
     elif [ ${ARG} = '--include-gps-logs' ]; then
         SOURCE_DIRS+=("--include=${GPS_LOG_DIR}")
+
+    elif [ ${ARG} = '--include-all-logs' ]; then
+        SOURCE_DIRS+=("--include=${GPS_LOG_DIR}")
+        SOURCE_DIRS+=("--include=${LOG_DIR}")
 
     elif [ ${ARG} = '--clean' ]; then
         CLEAN=true
