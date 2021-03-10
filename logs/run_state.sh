@@ -66,7 +66,7 @@ DAQ_STATE=${RECOVERABLE}
 GPS_STATE=${RECOVERABLE}
 
 FAIL_COUNT="0"
-MAX_TRIES="360" # approx 15 mins before we say there is a serious issue 
+MAX_TRIES="120" # approx 15 mins before we say there is a serious issue 
 
 # Loop forever until user presses Ctrl-C
 while [ 1 ]
@@ -75,7 +75,18 @@ do
 #
 #    DAQ State 
 #
-if DAQ_CURRENT_DIR_SIZE=$(du /home/pi/ACBOX/MCC_DAQ/data | head -n1 | sed -e 's/\s.*$//'); then
+if [[ ${DAQ_STATE} = ${FAILURE} || ${GPS_STATE} = ${FAILURE} ]]; then
+    # BLINK FAST
+    echo "[`date +'%s'`]: DAQ OR GPS are in an un-recoverable state. Fast blinking until we shutdown..."
+    while [ 1 ]
+    do
+        setLightState $BLUE $ON
+        sleep 0.1
+        setLightState $BLUE $OFF
+        sleep 0.1
+    done
+
+elif DAQ_CURRENT_DIR_SIZE=$(du /home/pi/ACBOX/MCC_DAQ/data | head -n1 | sed -e 's/\s.*$//'); then
     #echo "DAQ_PREV_DIR_SIZE: ${DAQ_PREV_DIR_SIZE}"
     #echo "DAQ_CURRENT_DIR_SIZE: ${DAQ_CURRENT_DIR_SIZE}"
     if [ $((DAQ_CURRENT_DIR_SIZE)) -gt $((DAQ_PREV_DIR_SIZE)) ]; then
@@ -112,18 +123,7 @@ GPS_PREV_DIR_SIZE=${GPS_CURRENT_DIR_SIZE}
 
 sleep 1 # everyone gets a sleep!
 
-if [[ ${DAQ_STATE} = ${FAILURE} || ${GPS_STATE} = ${FAILURE} ]]; then
-    # BLINK FAST
-    echo "[`date +'%s'`]: DAQ OR GPS are in an un-recoverable state. Fast blinking until we shutdown..."
-    while [ 1 ]
-    do
-        setLightState $BLUE $ON
-        sleep 0.1
-        setLightState $BLUE $OFF
-        sleep 0.1
-    done
-
-elif [[ ${DAQ_STATE} = ${RECOVERABLE}  || ${GPS_STATE} = ${RECOVERABLE} ]]; then
+if [[ ${DAQ_STATE} = ${RECOVERABLE}  || ${GPS_STATE} = ${RECOVERABLE} ]]; then
     # SLOW_BLINK
     FAIL_COUNT=$((FAIL_COUNT+1))
     if [[ $((FAIL_COUNT)) -gt $((MAX_TRIES)) ]]; then
@@ -136,14 +136,15 @@ elif [[ ${DAQ_STATE} = ${RECOVERABLE}  || ${GPS_STATE} = ${RECOVERABLE} ]]; then
         sleep 1.5
         setLightState $BLUE $OFF
     fi
-else
+elif [[ ${DAQ_STATE} = ${RUNNING} && ${GPS_STATE} = ${RUNNING} ]]; then
     FAIL_COUNT="0"
     echo "[`date +'%s'`]: DAQ and GPS are in a running state!"
     # SOLID BLUE -- ALL OK
     setLightState $BLUE $ON
-    sleep 20
+    sleep 60
 
 fi
 done
 
 setLightState $BLUE $OFF
+
