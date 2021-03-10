@@ -39,9 +39,11 @@ USAGE=$(cat <<-END
         * --keep-<target_system> can be combined to keep GPS data && DAQ data && LOGS.
         ex: --keep-gps --keep-daq # will only delete general log files
 
-        --dry-run --------------> Run as dry run with no actual changes 
+        --dry-run --------------> Run as dry run with no actual changes
+
+        * short arguments MUST preceed long arguments
         -f <CONFIG.JSON-FILE> --> Pass config file if different than $HOME/ACBOX/MCC_DAQ/config.json
-    -q ---------------------> Quiet (will not ask for user input)
+        -q ---------------------> Quiet (will not ask for user input)
 
 * enviroment variables this script uses
  \$GPS_DATA_DIR ----------------> Directory containing GPS data files (track_<EPOCH>.nmea)
@@ -57,7 +59,7 @@ QUIET=false
 #
 #   HANDLE REQUIRED AND OPTIONAL SHORT ARGS
 #
-while getopts f:q:- flag
+while getopts f:-:q flag
 do
     case "${flag}" in
         f) CONFIG_FILE=$(cat ${OPTARG});;
