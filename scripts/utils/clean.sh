@@ -148,7 +148,7 @@ END
 #
 echo -e "$PAYLOAD\n"
 
-if [ !${QUIET} ]; then
+if [ ${QUIET} = false ]; then
     read -p "Hit ENTER to conntinue OR Ctrl + c to quit."
 fi
 
